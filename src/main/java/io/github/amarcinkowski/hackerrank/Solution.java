@@ -3,13 +3,14 @@ package io.github.amarcinkowski.hackerrank;
 import java.io.File;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Solution implements Command {
 
 	public final static String BASE_PACKAGE = Solution.class.getPackage().getName();
 
-	protected final static Logger logger = Logger.getLogger(Solution.class);
+	public final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
 	private final static String TEST_DATA_FILEPATH = "src/test/resources";
 	private final static String IN_DATA_EXTENSION = ".in";

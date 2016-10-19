@@ -1,6 +1,5 @@
 package io.gihtub.amarcinkowski.hackerrank.java.tests;
 
-import org.apache.log4j.chainsaw.Main;
 import org.junit.Test;
 
 import io.gihtub.amarcinkowski.hackerrank.java.HackerRankTest;

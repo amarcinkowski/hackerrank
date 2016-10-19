@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.github.amarcinkowski.utils.FileUtils;
 
 public class SolutionBuilder {
 
-	private final static Logger logger = Logger.getLogger(SolutionBuilder.class);
+	final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
 	public final static String SRC_DIR = "src";
 

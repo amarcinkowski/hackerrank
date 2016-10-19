@@ -1,13 +1,14 @@
 package io.gihtub.amarcinkowski.hackerrank.java;
 
-import org.apache.log4j.Logger;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestSettings implements TestRule {
 
-	private final static Logger logger = Logger.getLogger(TestSettings.class);
+	public static final Logger logger = LoggerFactory.getLogger(TestSettings.class);
 	String className, methodName;
 
 	@Override

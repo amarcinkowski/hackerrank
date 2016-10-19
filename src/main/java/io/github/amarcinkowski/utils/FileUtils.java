@@ -6,15 +6,16 @@ import java.nio.file.Files;
 import java.util.Arrays;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileUtils {
 
-	private final static Logger log = Logger.getLogger(FileUtils.class);
+	final static Logger logger = LoggerFactory.getLogger(FileUtils.class);
 
 	public static int diffsResultExpected(File f1, File f2) throws IOException {
 		if (!FileUtils.filesSame(f1, f2)) {
-			log.warn("Diffs: " + FileUtils.getDifferences(f1, f2));
+			logger.warn("Diffs: " + FileUtils.getDifferences(f1, f2));
 		}
 		return FileUtils.getNumberOfDifferences(f1, f2);
 	}
@@ -41,10 +42,10 @@ public class FileUtils {
 
 	public static void createFileIfNotExisting(File f) throws IOException {
 		if (!f.exists()) {
-			log.error(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
+			logger.error(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
 			f.createNewFile();
 		} else if (f.length() == 0) {
-			log.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
+			logger.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
 			System.exit(0);
 		}
 	}
