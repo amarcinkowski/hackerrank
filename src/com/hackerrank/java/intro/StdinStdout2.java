@@ -1,5 +1,6 @@
 package com.hackerrank.java.intro;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 import com.hackerrank.java.Solution;
@@ -17,6 +18,7 @@ public class StdinStdout2 extends Solution {
 		scanner = new Scanner(System.in, "UTF-8");
 		// "\r\n" on hackerrank
 		scanner.useDelimiter(System.getProperty("line.separator"));
+		scanner.useLocale(new Locale.Builder().setLanguage("pl").setRegion("PL").build());
 		try {
 			int i = scanner.nextInt();
 			double d = scanner.nextDouble();
