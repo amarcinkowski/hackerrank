@@ -3,7 +3,6 @@ package com.hackerrank.java;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -35,7 +34,6 @@ public class HackerRankTest {
 
 	@BeforeClass
 	public static void beforeClass() {
-		BasicConfigurator.configure();
 		Logger.getRootLogger().setLevel(Level.INFO);
 	}
 
