@@ -1,9 +1,11 @@
 package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,18 +13,15 @@ import io.github.amarcinkowski.utils.FileUtils;
 
 public class SolutionBuilder {
 
-	final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
+	private static final String PACKAGE = "PACKAGE";
 
-	public final static String SRC_DIR = "src";
+	private static final String CLASSNAME2 = "CLASSNAME";
 
-	public final static String SOLUTION_TEMPLATE = "package PACKAGE;\n\n" + "import java.util.Scanner;\n"
-			+ "import com.hackerrank.java.Solution;\n\npublic class CLASSNAME extends Solution {\n"
-			+ "public CLASSNAME(String name) {super(name);}"
-			+ "	/*\n* overloaded log:\n\n\tprivate void log(String msg) {}\n/* */\n\n"
-			+ "\tScanner scanner;\n\n\tpublic void execute() "
-			+ "{\n\t\tlog(\"execute\");\n\t\tscanner = new Scanner(System.in);"
-			+ "\n\t\tint x = scanner.nextInt();\n\t}\n\n// hr:\n//	public static void main(String[] args) "
-			+ "{new Solution().execute();}\n}\n";
+	private static final String SOLUTION_TWIG = "src/main/resources/solution.twig";
+
+	private static final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
+
+	public final static String SRC_DIR = "src/main/java";
 
 	private String className;
 	private String packageName;
@@ -71,9 +70,9 @@ public class SolutionBuilder {
 
 	private void copyTemplate(File classFile) throws IOException {
 		if (fromTemplate) {
-			FileWriter fw = new FileWriter(classFile);
-			fw.write(SOLUTION_TEMPLATE.replace("CLASSNAME", className).replaceAll("PACKAGE", packageName));
-			fw.close();
+			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(SOLUTION_TWIG));
+			JtwigModel model = JtwigModel.newModel().with(CLASSNAME2, className).with(PACKAGE, packageName);
+			template.render(model, new FileOutputStream(classFile));
 		}
 	}
 
@@ -83,19 +82,6 @@ public class SolutionBuilder {
 		create(classFile);
 		copyTemplate(classFile);
 		return new Solution(getCanonical());
-	}
-
-	public static void moveSolution(String src, String dest) {
-		try {
-			Solution srcSolution = new SolutionBuilder().fromCanonical(src).build();
-			Solution destSolution = new SolutionBuilder().fromCanonical(dest).build();
-			srcSolution.getExpectedFile().renameTo(destSolution.getExpectedFile());
-			srcSolution.getInFile().renameTo(destSolution.getInFile());
-			srcSolution.getResultFile().renameTo(destSolution.getResultFile());
-			javaFileFromCanonical(src).renameTo(javaFileFromCanonical(dest));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
