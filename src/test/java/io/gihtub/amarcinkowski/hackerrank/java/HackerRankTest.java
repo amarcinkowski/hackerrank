@@ -43,7 +43,7 @@ public class HackerRankTest {
 
 	@Before
 	public void setup() throws Exception {
-		logger.info("setup: " + testName.getMethodName());
+		logger.debug("setup: " + testName.getMethodName());
 		loadTest();
 		requiredFileCheck();
 		IOUtils.redirectIO(current.getInFile(), current.getResultFile());

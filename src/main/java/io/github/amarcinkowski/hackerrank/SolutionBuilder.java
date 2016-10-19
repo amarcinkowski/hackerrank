@@ -77,7 +77,7 @@ public class SolutionBuilder {
 	}
 
 	public Solution build() throws IOException {
-		logger.info("building new solution");
+		logger.debug("building new solution");
 		File classFile = javaFileFromCanonical(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);

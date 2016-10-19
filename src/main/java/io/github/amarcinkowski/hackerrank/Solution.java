@@ -37,7 +37,7 @@ public class Solution implements Command {
 
 	protected void log(Object log) {
 		if (System.getenv("LOGNAME").equals("amarcinkowski")) {
-			logger.info(log.toString());
+			logger.debug(log.toString());
 		}
 	}
 
