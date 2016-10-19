@@ -2,7 +2,7 @@ package com.hackerrank.java.projecteuler;
 
 import java.util.Scanner;
 
-import com.hackerrank.java.Solution;
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class MultiplesOf3and5 extends Solution {
 	public MultiplesOf3and5(String name) {

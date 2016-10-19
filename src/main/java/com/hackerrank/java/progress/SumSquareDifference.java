@@ -1,7 +1,8 @@
 package com.hackerrank.java.progress;
 
 import java.util.Scanner;
-import com.hackerrank.java.Solution;
+
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class SumSquareDifference extends Solution {
 	public SumSquareDifference(String name) {

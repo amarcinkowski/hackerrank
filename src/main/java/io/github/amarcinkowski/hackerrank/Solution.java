@@ -1,4 +1,4 @@
-package com.hackerrank.java;
+package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
 

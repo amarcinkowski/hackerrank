@@ -1,7 +1,8 @@
 package com.hackerrank.java.advanced;
 
 import java.util.Scanner;
-import com.hackerrank.java.Solution;
+
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class Singleton extends Solution {
 public Singleton(String name) {super(name);}	/*

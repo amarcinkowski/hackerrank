@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import com.hackerrank.java.Solution;
+import io.github.amarcinkowski.hackerrank.Solution;
 
 interface performOperation {
 	int check(int a);

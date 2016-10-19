@@ -1,7 +1,8 @@
 package com.hackerrank.java.advanced;
 
 import java.util.Scanner;
-import com.hackerrank.java.Solution;
+
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class JavaFactory extends Solution {
 	public JavaFactory(String name) {

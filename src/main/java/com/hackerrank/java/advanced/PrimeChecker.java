@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.hackerrank.java.Solution;
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class PrimeChecker extends Solution {
 	public PrimeChecker(String name) {

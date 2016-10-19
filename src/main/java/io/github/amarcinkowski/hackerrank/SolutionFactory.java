@@ -1,4 +1,4 @@
-package com.hackerrank.java;
+package io.github.amarcinkowski.hackerrank;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

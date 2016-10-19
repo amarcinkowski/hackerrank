@@ -17,6 +17,9 @@ import com.hackerrank.java.tests.Progress;
 import io.github.amarcinkowski.FileUtils;
 import io.github.amarcinkowski.IOUtils;
 import io.github.amarcinkowski.TestInfo;
+import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.hackerrank.SolutionBuilder;
+import io.github.amarcinkowski.hackerrank.SolutionFactory;
 
 public class HackerRankTest {
 

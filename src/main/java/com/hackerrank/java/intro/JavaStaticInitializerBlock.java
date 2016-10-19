@@ -1,7 +1,8 @@
 package com.hackerrank.java.intro;
 
 import java.util.Scanner;
-import com.hackerrank.java.Solution;
+
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class JavaStaticInitializerBlock extends Solution {
 	public JavaStaticInitializerBlock(String name) {

@@ -3,7 +3,7 @@ package com.hackerrank.java.advanced;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import com.hackerrank.java.Solution;
+import io.github.amarcinkowski.hackerrank.Solution;
 
 public class CanYouAccess extends Solution {
 	public CanYouAccess(String name) {
