@@ -11,9 +11,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.slf4j.LoggerFactory;
 
-import io.gihtub.amarcinkowski.hackerrank.java.tests.Progress;
 import io.github.amarcinkowski.hackerrank.Solution;
-import io.github.amarcinkowski.hackerrank.SolutionBuilder;
 import io.github.amarcinkowski.hackerrank.SolutionFactory;
 import io.github.amarcinkowski.hackerrank.TestInfo;
 import io.github.amarcinkowski.utils.FileUtils;
@@ -35,7 +33,6 @@ public class HackerRankTest {
 
 	@BeforeClass
 	public static void beforeClass() {
-//		Logger.getRootLogger().setLevel(Level.INFO);
 	}
 
 	private void requiredFileCheck() throws IOException {
@@ -56,7 +53,6 @@ public class HackerRankTest {
 	public void check() {
 		IOUtils.resetRedirectedIO();
 		printNumOfDiffs();
-		moveDone();
 	}
 
 	private void printNumOfDiffs() {
@@ -92,21 +88,6 @@ public class HackerRankTest {
 			current = factory.getSolution(canonical);
 		} else {
 			stopTesting(currentlyRuningTest.getName());
-		}
-	}
-
-	public void moveDone() {
-		Method[] methods = Progress.class.getMethods();
-		for (Method method : methods) {
-			if (method.isAnnotationPresent(TestInfo.class)) {
-				String name = method.getAnnotation(TestInfo.class).solutionClass();
-				String group = method.getAnnotation(TestInfo.class).group();
-				String from = String.format("%s.%s", "com.hackerrank.java.progress", name);
-				String to = String.format("%s.%s.%s", "com.hackerrank.java", group, name);
-				if (method.getAnnotation(TestInfo.class).done()) {
-					SolutionBuilder.moveSolution(from, to);
-				}
-			}
 		}
 	}
 
