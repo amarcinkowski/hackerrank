@@ -13,7 +13,7 @@ public class Solution implements Command {
 
 	protected final static Logger logger = Logger.getLogger(Solution.class);
 
-	private final static String FILEPATH = "resources";
+	private final static String FILEPATH = "src/test/resources";
 	private final static String IN = ".in";
 	private final static String RESULT = ".result";
 	private final static String EXPECTED = ".expected";
