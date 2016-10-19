@@ -6,15 +6,15 @@ import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 
 public class Solution implements Command {
-	
+
 	public final static String BASE_PACKAGE = Solution.class.getPackage().getName();
 
 	protected final static Logger logger = Logger.getLogger(Solution.class);
 
-	private final static String FILEPATH = "src/test/resources";
-	private final static String IN = ".in";
-	private final static String RESULT = ".result";
-	private final static String EXPECTED = ".expected";
+	private final static String TEST_DATA_FILEPATH = "src/test/resources";
+	private final static String IN_DATA_EXTENSION = ".in";
+	private final static String RESULT_EXTENSION = ".result";
+	private final static String EXPECTED_EXTENSION = ".expected";
 	private final String name;
 
 	private File inFile, resultFile, expectedFile;
@@ -24,10 +24,10 @@ public class Solution implements Command {
 		String packageName = name.substring(0, name.lastIndexOf('.'));
 		String filename = name.substring(name.lastIndexOf('.') + 1);
 		String subdir = packageName.substring(packageName.lastIndexOf('.') + 1);
-		String base = String.format("%s/%s/%s", FILEPATH, subdir, filename);
-		inFile = new File(base + IN);
-		resultFile = new File(base + RESULT);
-		expectedFile = new File(base + EXPECTED);
+		String base = String.format("%s/%s/%s", TEST_DATA_FILEPATH, subdir, filename);
+		inFile = new File(base + IN_DATA_EXTENSION);
+		resultFile = new File(base + RESULT_EXTENSION);
+		expectedFile = new File(base + EXPECTED_EXTENSION);
 	}
 
 	public Solution() {
