@@ -1,4 +1,4 @@
-package io.github.amarcinkowski;
+package io.github.amarcinkowski.utils;
 
 public class StringUtils {
 

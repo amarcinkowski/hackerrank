@@ -4,7 +4,7 @@ import org.apache.log4j.chainsaw.Main;
 import org.junit.Test;
 
 import io.gihtub.amarcinkowski.hackerrank.java.HackerRankTest;
-import io.github.amarcinkowski.TestInfo;
+import io.github.amarcinkowski.hackerrank.TestInfo;
 
 public class Progress extends HackerRankTest {
 

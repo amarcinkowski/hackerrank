@@ -13,12 +13,12 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 
 import io.gihtub.amarcinkowski.hackerrank.java.tests.Progress;
-import io.github.amarcinkowski.FileUtils;
-import io.github.amarcinkowski.IOUtils;
-import io.github.amarcinkowski.TestInfo;
 import io.github.amarcinkowski.hackerrank.Solution;
 import io.github.amarcinkowski.hackerrank.SolutionBuilder;
 import io.github.amarcinkowski.hackerrank.SolutionFactory;
+import io.github.amarcinkowski.hackerrank.TestInfo;
+import io.github.amarcinkowski.utils.FileUtils;
+import io.github.amarcinkowski.utils.IOUtils;
 
 public class HackerRankTest {
 

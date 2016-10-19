@@ -5,8 +5,6 @@ import java.io.File;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 
-import io.github.amarcinkowski.Command;
-
 public class Solution implements Command {
 	
 	public final static String BASE_PACKAGE = Solution.class.getPackage().getName();

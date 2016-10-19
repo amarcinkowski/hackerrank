@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import io.github.amarcinkowski.FileUtils;
+import io.github.amarcinkowski.utils.FileUtils;
 
 public class SolutionBuilder {
 

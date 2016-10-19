@@ -1,4 +1,4 @@
-package io.github.amarcinkowski;
+package io.github.amarcinkowski.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

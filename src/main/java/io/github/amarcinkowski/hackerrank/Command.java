@@ -1,4 +1,4 @@
-package io.github.amarcinkowski;
+package io.github.amarcinkowski.hackerrank;
 
 public interface Command  {
 

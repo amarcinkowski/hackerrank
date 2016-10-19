@@ -1,4 +1,4 @@
-package io.github.amarcinkowski;
+package io.github.amarcinkowski.hackerrank;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

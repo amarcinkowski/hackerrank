@@ -3,7 +3,7 @@ package io.gihtub.amarcinkowski.hackerrank.java.tests;
 import org.junit.Test;
 
 import io.gihtub.amarcinkowski.hackerrank.java.HackerRankTest;
-import io.github.amarcinkowski.TestInfo;
+import io.github.amarcinkowski.hackerrank.TestInfo;
 
 public class Advanced extends HackerRankTest {
 
