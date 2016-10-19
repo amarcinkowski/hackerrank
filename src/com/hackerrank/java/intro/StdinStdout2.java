@@ -11,18 +11,23 @@ public class StdinStdout2 extends Solution {
 	}
 
 	Scanner scanner;
-	
+
 	public void execute() {
 		logger.debug("execute");
-		scanner = new Scanner(System.in, "UTF-8"); 
-		scanner.useDelimiter(System.getProperty("line.separator")); // \r\n on hackerrank 
-		int i = scanner.nextInt();
-		double d = scanner.nextDouble();
-		String s = scanner.next();
-		
-		System.out.println("String: " + s);
-		System.out.println("Double: " + d);
-		System.out.println("Int: " + i);
+		scanner = new Scanner(System.in, "UTF-8");
+		// "\r\n" on hackerrank
+		scanner.useDelimiter(System.getProperty("line.separator"));
+		try {
+			int i = scanner.nextInt();
+			double d = scanner.nextDouble();
+			String s = scanner.next();
+
+			System.out.println("String: " + s);
+			System.out.println("Double: " + d);
+			System.out.println("Int: " + i);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		scanner.close();
 	}
 
