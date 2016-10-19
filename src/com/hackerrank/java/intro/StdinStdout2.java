@@ -15,7 +15,7 @@ public class StdinStdout2 extends Solution {
 	public void execute() {
 		logger.debug("execute");
 		scanner = new Scanner(System.in); 
-		scanner.useDelimiter("\n");
+		scanner.useDelimiter("\n"); // \r\n on hackerrank 
 		int i = scanner.nextInt();
 		double d = scanner.nextDouble();
 		String s = scanner.next();
