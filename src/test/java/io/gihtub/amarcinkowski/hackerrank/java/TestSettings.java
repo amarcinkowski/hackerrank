@@ -19,7 +19,7 @@ public class TestSettings implements TestRule {
 				className = description.getClassName();
 				methodName = description.getMethodName();
 				String str = String.format("Running test %s in %s", methodName, className);
-				logger.info(str);
+				logger.debug(str);
 				base.evaluate();
 			}
 		};
