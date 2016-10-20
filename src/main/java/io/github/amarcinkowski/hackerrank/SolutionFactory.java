@@ -6,13 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 public class SolutionFactory {
 
 	@SuppressWarnings("unchecked")
-	private Class<Solution> getSolutionClass(String name) throws IOException {
-		try {
-			return (Class<Solution>) Class.forName(name);
-		} catch (ClassNotFoundException e) {
-			return (Class<Solution>) new SolutionBuilder().fromCanonical(name).createFile(true).fromTemplate(true)
-					.build().getClass();
-		}
+	private Class<Solution> getSolutionClass(String name) throws IOException, ClassNotFoundException {
+		return (Class<Solution>) Class.forName(name);
 	}
 
 	private Solution getInstance(String name)
