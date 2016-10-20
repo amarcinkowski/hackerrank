@@ -6,29 +6,29 @@ import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.amarcinkowski.utils.ClassnameUtils;
+
 public class Solution implements Command {
 
 	public final static String BASE_PACKAGE = Solution.class.getPackage().getName();
 
 	public final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
-	private final static String TEST_DATA_FILEPATH = "src/test/resources";
-	private final static String IN_DATA_EXTENSION = ".in";
-	private final static String RESULT_EXTENSION = ".result";
-	private final static String EXPECTED_EXTENSION = ".expected";
+	private final static String IN_DATA_EXTENSION = "in";
+	private final static String RESULT_EXTENSION = "result";
+	private final static String EXPECTED_EXTENSION = "expected";
 	private final String name;
 
 	private File inFile, resultFile, expectedFile;
 
 	public Solution(String name) {
 		this.name = name;
-		String packageName = name.substring(0, name.lastIndexOf('.'));
-		String filename = name.substring(name.lastIndexOf('.') + 1);
-		String subdir = packageName.substring(packageName.lastIndexOf('.') + 1);
-		String base = String.format("%s/%s/%s", TEST_DATA_FILEPATH, subdir, filename);
-		inFile = new File(base + IN_DATA_EXTENSION);
-		resultFile = new File(base + RESULT_EXTENSION);
-		expectedFile = new File(base + EXPECTED_EXTENSION);
+		String packageName = ClassnameUtils.getPackage(name);
+		String filename = ClassnameUtils.getFilename(name);
+		String subdir = ClassnameUtils.getSubdir(packageName);
+		inFile = new File(ClassnameUtils.getFilepath(subdir, filename, IN_DATA_EXTENSION));
+		resultFile = new File(ClassnameUtils.getFilepath(subdir, filename, RESULT_EXTENSION));
+		expectedFile = new File(ClassnameUtils.getFilepath(subdir, filename, EXPECTED_EXTENSION));
 	}
 
 	public Solution() {

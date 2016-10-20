@@ -35,17 +35,10 @@ public class HackerRankTest {
 	public static void beforeClass() {
 	}
 
-	private void requiredFileCheck() throws IOException {
-		logger.debug("stdin/stdout file check - if missing create: " + testName.getMethodName());
-		FileUtils.createFileIfNotExisting(current.getInFile());
-		FileUtils.createFileIfNotExisting(current.getExpectedFile());
-	}
-
 	@Before
 	public void setup() throws Exception {
 		logger.debug("setup: " + testName.getMethodName());
 		loadTest();
-		requiredFileCheck();
 		IOUtils.redirectIO(current.getInFile(), current.getResultFile());
 	}
 

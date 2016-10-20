@@ -81,7 +81,10 @@ public class SolutionBuilder {
 		File classFile = javaFileFromCanonical(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);
-		return new Solution(getCanonical());
+		Solution result = new Solution(getCanonical());
+		FileUtils.createFileIfNotExisting(result.getInFile());
+		FileUtils.createFileIfNotExisting(result.getExpectedFile());
+		return result;
 	}
 
 }
