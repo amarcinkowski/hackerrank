@@ -13,11 +13,11 @@ import io.github.amarcinkowski.utils.FileUtils;
 
 public class SolutionBuilder {
 
-	private static final String PACKAGE = "PACKAGE";
+	private static final String PACKAGE_TWIG = "PACKAGE";
 
-	private static final String CLASSNAME2 = "CLASSNAME";
+	private static final String CLASSNAME_TWIG = "CLASSNAME";
 
-	private static final String SOLUTION_TWIG = "src/main/resources/solution.twig";
+	private static final String SOLUTION_TWIG_TEMPLATE = "src/main/resources/solution.twig";
 
 	private static final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
@@ -70,8 +70,8 @@ public class SolutionBuilder {
 
 	private void copyTemplate(File classFile) throws IOException {
 		if (fromTemplate) {
-			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(SOLUTION_TWIG));
-			JtwigModel model = JtwigModel.newModel().with(CLASSNAME2, className).with(PACKAGE, packageName);
+			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(SOLUTION_TWIG_TEMPLATE));
+			JtwigModel model = JtwigModel.newModel().with(CLASSNAME_TWIG, className).with(PACKAGE_TWIG, packageName);
 			template.render(model, new FileOutputStream(classFile));
 		}
 	}
@@ -81,10 +81,9 @@ public class SolutionBuilder {
 		File classFile = javaFileFromCanonical(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);
-		Solution result = new Solution(getCanonical());
-		FileUtils.createFileIfNotExisting(result.getInFile());
-		FileUtils.createFileIfNotExisting(result.getExpectedFile());
-		return result;
+		FileUtils.createFileIfNotExisting(FileUtils.getInFile(getCanonical()));
+		FileUtils.createFileIfNotExisting(FileUtils.getExpectedFile(getCanonical()));
+		return new Solution(getCanonical());
 	}
 
 }

@@ -9,6 +9,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.amarcinkowski.hackerrank.Solution;
+
 public class FileUtils {
 
 	final static Logger logger = LoggerFactory.getLogger(FileUtils.class);
@@ -48,6 +50,18 @@ public class FileUtils {
 			logger.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
 			System.exit(0);
 		}
+	}
+
+	public static File getInFile(String solutionClass) {
+		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.IN_DATA_EXTENSION);
+	}
+
+	public static File getResultFile(String solutionClass) {
+		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.RESULT_EXTENSION);
+	}
+
+	public static File getExpectedFile(String solutionClass) {
+		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.EXPECTED_EXTENSION);
 	}
 
 }
