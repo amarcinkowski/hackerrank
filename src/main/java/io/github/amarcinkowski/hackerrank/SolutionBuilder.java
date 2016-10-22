@@ -8,34 +8,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang.StringUtils;
-import org.jtwig.JtwigModel;
-import org.jtwig.JtwigTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.amarcinkowski.utils.FileUtils;
+import io.github.amarcinkowski.utils.TemplateUtils;
 
 public class SolutionBuilder {
 
 	private static final String NEW_LINE = "\n";
 
-	private static final String METHOD = "METHOD";
-	private static final String DESCRIPTION = "DESCRIPTION";
-	private static final String CLASS = "CLASS";
-	private static final String DOMAIN = "DOMAIN";
-	private static final String GROUP = "GROUP";
-
-	private static final String FILE_FROM_CANONICAL_FORMAT_STRING = "%s/%s.%s";
+	private static final String FILEPATH_FORMAT_STRING = "%s/%s.%s";
 	private static final String CANONICAL_FORMAT_STRING = "%s.%s";
 	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.hackerrank.%s";
 	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
-
-	private static final String PACKAGE_TWIG = "PACKAGE";
-	private static final String CLASSNAME_TWIG = "CLASSNAME";
-
-	private static final String SOLUTION_TWIG_TEMPLATE = "src/main/resources/solution.twig";
-	private static final String TEST_TWIG_TEMPLATE = "src/main/resources/test.twig";
 
 	private static final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
@@ -88,7 +74,9 @@ public class SolutionBuilder {
 	}
 
 	private static File javaFileFromCanonical(String name) {
-		return new File(String.format(FILE_FROM_CANONICAL_FORMAT_STRING, SRC_DIR, name.replace(".", "/"), "java"));
+		String dir = name.replace(".", "/");
+		String path = String.format(FILEPATH_FORMAT_STRING, SRC_DIR, dir, "java");
+		return new File(path);
 	}
 
 	private void create(File classFile) throws IOException {
@@ -99,24 +87,19 @@ public class SolutionBuilder {
 
 	private void copyTemplate(File classFile) throws IOException {
 		if (fromTemplate) {
-			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(SOLUTION_TWIG_TEMPLATE));
-			JtwigModel model = JtwigModel.newModel().with(CLASSNAME_TWIG, className).with(PACKAGE_TWIG, packageName);
-			String s = template.render(model);
-			Files.write(classFile.toPath(), s.getBytes());
+			String template = TemplateUtils.getRenderedTemplate(className, packageName);
+			Files.write(classFile.toPath(), template.getBytes());
 		}
 	}
-
+	
 	private void addJUnitTest(File file) throws IOException {
 		if (addJUnit) {
-			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(TEST_TWIG_TEMPLATE));
-			JtwigModel model = JtwigModel.newModel().with(DOMAIN, domainName).with(GROUP, groupName)
-					.with(DESCRIPTION, hackerrankDescription).with(CLASS, className)
-					.with(METHOD, StringUtils.uncapitalize(className));
 			String truncated = truncateFile(file.getAbsolutePath());
-			String methodString = template.render(model);
+			String methodString = TemplateUtils.getRenderedTemplate(domainName, groupName, className, hackerrankDescription);
 			StringBuilder sb = new StringBuilder();
 			sb.append(truncated);
 			sb.append(methodString);
+			sb.append("\n}\n");
 			Files.write(Paths.get(file.getAbsolutePath()), sb.toString().getBytes());
 		}
 	}
