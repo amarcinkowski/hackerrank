@@ -1,7 +1,6 @@
 package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 import org.slf4j.Logger;
@@ -18,8 +18,20 @@ import io.github.amarcinkowski.utils.FileUtils;
 
 public class SolutionBuilder {
 
-	private static final String PACKAGE_TWIG = "PACKAGE";
+	private static final String NEW_LINE = "\n";
 
+	private static final String METHOD = "METHOD";
+	private static final String DESCRIPTION = "DESCRIPTION";
+	private static final String CLASS = "CLASS";
+	private static final String DOMAIN = "DOMAIN";
+	private static final String GROUP = "GROUP";
+
+	private static final String FILE_FROM_CANONICAL_FORMAT_STRING = "%s/%s.%s";
+	private static final String CANONICAL_FORMAT_STRING = "%s.%s";
+	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.hackerrank.%s";
+	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
+
+	private static final String PACKAGE_TWIG = "PACKAGE";
 	private static final String CLASSNAME_TWIG = "CLASSNAME";
 
 	private static final String SOLUTION_TWIG_TEMPLATE = "src/main/resources/solution.twig";
@@ -31,14 +43,14 @@ public class SolutionBuilder {
 
 	private String className;
 	private String packageName;
-	private String domain;
+	private String domainName;
 	private boolean createFile = false;
 	private boolean fromTemplate = false;
 	private boolean withInOutFiles = false;
 	private boolean addJUnit = false;
 
-	private String description;
-	private String group;
+	private String hackerrankDescription;
+	private String groupName;
 
 	public SolutionBuilder className(String className) {
 		this.className = className;
@@ -72,11 +84,11 @@ public class SolutionBuilder {
 	}
 
 	public String getCanonical() {
-		return String.format("%s.%s", packageName, className);
+		return String.format(CANONICAL_FORMAT_STRING, packageName, className);
 	}
 
 	private static File javaFileFromCanonical(String name) {
-		return new File(String.format("%s/%s.%s", SRC_DIR, name.replace(".", "/"), "java"));
+		return new File(String.format(FILE_FROM_CANONICAL_FORMAT_STRING, SRC_DIR, name.replace(".", "/"), "java"));
 	}
 
 	private void create(File classFile) throws IOException {
@@ -89,42 +101,38 @@ public class SolutionBuilder {
 		if (fromTemplate) {
 			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(SOLUTION_TWIG_TEMPLATE));
 			JtwigModel model = JtwigModel.newModel().with(CLASSNAME_TWIG, className).with(PACKAGE_TWIG, packageName);
-			template.render(model, new FileOutputStream(classFile));
+			String s = template.render(model);
+			Files.write(classFile.toPath(), s.getBytes());
 		}
 	}
 
-	private void addJUnitTest() throws IOException {
+	private void addJUnitTest(File file) throws IOException {
 		if (addJUnit) {
 			JtwigTemplate template = JtwigTemplate.fileTemplate(new File(TEST_TWIG_TEMPLATE));
-			JtwigModel model = JtwigModel.newModel().with("DOMAIN", domain).with("GROUP", group)
-					.with("DESCRIPTION", description).with("CLASS", className)
-					.with("METHOD", decapitalizeFirstLetter(className));
-			String filepath = "/home/amarcinkowski/git/hackerrank/src/test/java/io/gihtub/amarcinkowski/hackerrank/java/tests/Advanced.java";
-			String truncated = truncateFile(filepath);
+			JtwigModel model = JtwigModel.newModel().with(DOMAIN, domainName).with(GROUP, groupName)
+					.with(DESCRIPTION, hackerrankDescription).with(CLASS, className)
+					.with(METHOD, StringUtils.uncapitalize(className));
+			String truncated = truncateFile(file.getAbsolutePath());
 			String methodString = template.render(model);
 			StringBuilder sb = new StringBuilder();
 			sb.append(truncated);
 			sb.append(methodString);
-			Files.write(Paths.get(filepath), sb.toString().getBytes());
+			Files.write(Paths.get(file.getAbsolutePath()), sb.toString().getBytes());
 		}
 	}
 
-	// TODO replace with StringUtils.uncaitalize
-	private String decapitalizeFirstLetter(String string) {
-		char c[] = string.toCharArray();
-		c[0] = Character.toLowerCase(c[0]);
-		return new String(c);
+	private static Stream<String> fileToStream(String filepath) throws IOException {
+		return Files.lines(Paths.get(filepath));
 	}
 
 	private static String truncateFile(String filepath) throws IOException {
-		String classEnding = "\\s*+}\\s*+\n";
-		try (Stream<String> lines = Files.lines(Paths.get(filepath))) {
+		try (Stream<String> lines = fileToStream(filepath)) {
 			List<String> replaced = lines.collect(Collectors.toList());
 			int i = replaced.size();
 			do {
 				logger.trace(replaced.get(--i));
-			} while (replaced.get(i).matches(classEnding));
-			return replaced.stream().limit(i).collect(Collectors.joining("\n"));
+			} while (replaced.get(i).matches(CLASS_ENDING_PATTERN));
+			return replaced.stream().limit(i).collect(Collectors.joining(NEW_LINE));
 		}
 	}
 
@@ -146,23 +154,23 @@ public class SolutionBuilder {
 		create(classFile);
 		copyTemplate(classFile);
 		createInOutFiles();
-		addJUnitTest();
+		addJUnitTest(classFile);
 		return new Solution(getCanonical());
 	}
 
 	public SolutionBuilder domain(String domain) {
-		this.domain = domain;
+		this.domainName = domain;
 		return this;
 	}
 
 	public SolutionBuilder description(String desc) {
-		this.description = desc;
+		this.hackerrankDescription = desc;
 		return this;
 	}
 
 	public SolutionBuilder group(String group) {
-		this.group = group;
-		this.packageName = String.format("io.github.amarcinkowski.hackerrank.%s", group);
+		this.groupName = group;
+		this.packageName = String.format(PACKAGE_FORMAT_STRING, group);
 		return this;
 	}
 
