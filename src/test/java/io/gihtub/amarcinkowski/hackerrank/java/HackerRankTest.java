@@ -43,7 +43,7 @@ public class HackerRankTest {
 		} catch (Exception e) {
 			stopTesting();
 		}
-		IOUtils.redirectIO(FileUtils.getInFile(current.getName()), FileUtils.getResultFile(current.getName()));
+		IOUtils.redirectIO(FileUtils.getInResourceFile(current.getName()), FileUtils.getResultResourceFile(current.getName()));
 	}
 
 	@After
@@ -53,8 +53,8 @@ public class HackerRankTest {
 	}
 
 	private int getNumOfDiffs() throws IOException {
-		return FileUtils.diffsResultExpected(FileUtils.getResultFile(current.getName()),
-				FileUtils.getExpectedFile(current.getName()));
+		return FileUtils.diffsResultExpected(FileUtils.getResultResourceFile(current.getName()),
+				FileUtils.getExpectedResourceFile(current.getName()));
 	}
 
 	private void printNumOfDiffs() {

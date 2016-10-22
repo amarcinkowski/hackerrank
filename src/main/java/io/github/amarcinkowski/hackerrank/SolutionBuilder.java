@@ -10,21 +10,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.amarcinkowski.utils.FileUtils;
+import io.github.amarcinkowski.utils.SolutionUtils;
 import io.github.amarcinkowski.utils.TemplateUtils;
 
 public class SolutionBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
-	private static final String FILEPATH_FORMAT_STRING = "%s/%s.%s";
 	private static final String CANONICAL_FORMAT_STRING = "%s.%s";
 	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.hackerrank.%s";
 	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
-	private static final String SRC_DIR = "src/main/java";
 	private static final String CLASS_END = "\n}\n";
-	private static final String SLASH = "/";
-	private static final String DOT = ".";
-	private static final String JAVA_EXT = "java";
 
 	private String className;
 	private String packageName;
@@ -40,12 +36,6 @@ public class SolutionBuilder {
 		return Files.lines(Paths.get(filepath));
 	}
 
-	private static File javaFileFromCanonical(String name) {
-		String dir = name.replace(DOT, SLASH);
-		String path = String.format(FILEPATH_FORMAT_STRING, SRC_DIR, dir, JAVA_EXT);
-		return new File(path);
-	}
-
 	private void addJUnitTest(File file) throws IOException {
 		if (addJUnit) {
 			String truncated = FileUtils.truncateFile(file.getAbsolutePath(), CLASS_ENDING_PATTERN);
@@ -57,7 +47,7 @@ public class SolutionBuilder {
 
 	public Solution build() throws IOException {
 		logger.debug("building new solution");
-		File classFile = javaFileFromCanonical(getCanonical());
+		File classFile = SolutionUtils.getJavaFile(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);
 		createInOutFiles();
@@ -90,8 +80,8 @@ public class SolutionBuilder {
 
 	private void createInOutFiles() throws IOException {
 		if (withInOutFiles) {
-			FileUtils.createFileIfNotExisting(FileUtils.getInFile(getCanonical()));
-			FileUtils.createFileIfNotExisting(FileUtils.getExpectedFile(getCanonical()));
+			FileUtils.createFileIfNotExisting(FileUtils.getInResourceFile(getCanonical()));
+			FileUtils.createFileIfNotExisting(FileUtils.getExpectedResourceFile(getCanonical()));
 		}
 	}
 
@@ -106,8 +96,8 @@ public class SolutionBuilder {
 	}
 
 	public SolutionBuilder fromCanonical(String canonical) {
-		className = canonical.substring(canonical.lastIndexOf(DOT) + 1);
-		packageName = canonical.substring(0, canonical.lastIndexOf(DOT));
+		className = canonical.substring(canonical.lastIndexOf(".") + 1);
+		packageName = canonical.substring(0, canonical.lastIndexOf("."));
 		return this;
 	}
 

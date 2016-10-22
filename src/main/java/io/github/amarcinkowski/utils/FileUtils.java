@@ -56,16 +56,16 @@ public class FileUtils {
 		}
 	}
 
-	public static File getInFile(String solutionClass) {
-		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.IN_DATA_EXTENSION);
+	public static File getInResourceFile(String solutionClass) {
+		return new File(SolutionUtils.getTestResourcePath(solutionClass) + Solution.IN_DATA_EXTENSION);
 	}
 
-	public static File getResultFile(String solutionClass) {
-		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.RESULT_EXTENSION);
+	public static File getResultResourceFile(String solutionClass) {
+		return new File(SolutionUtils.getTestResourcePath(solutionClass) + Solution.RESULT_EXTENSION);
 	}
 
-	public static File getExpectedFile(String solutionClass) {
-		return new File(ClassnameUtils.getFilepathBase(solutionClass) + Solution.EXPECTED_EXTENSION);
+	public static File getExpectedResourceFile(String solutionClass) {
+		return new File(SolutionUtils.getTestResourcePath(solutionClass) + Solution.EXPECTED_EXTENSION);
 	}
 
 	public static String truncateFile(String filepath, String pattern) throws IOException {
