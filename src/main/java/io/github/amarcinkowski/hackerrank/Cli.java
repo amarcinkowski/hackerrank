@@ -40,8 +40,6 @@ public class Cli {
 			// parse the command line arguments
 			CommandLine line = parser.parse(options, args);
 
-			LoggingUtils.setLevel(Level.INFO);
-
 			if (line.hasOption("quiet")) {
 				LoggingUtils.setLevel(Level.OFF);
 			}
@@ -52,16 +50,7 @@ public class Cli {
 
 			if (line.hasOption("run")) {
 				try {
-					InvocationRequest request = new DefaultInvocationRequest();
-					request.setPomFile(new File("pom.xml"));
-					request.setGoals(Collections.singletonList("test"));
-
-					Invoker invoker = new DefaultInvoker();
-					System.setProperty("maven.home", "/usr/share/maven");
-					InvocationResult ir = invoker.execute(request);
-					if (ir.getExitCode() != 0) {
-						throw new Exception("mvn failed");
-					}
+					mavenInvoke();
 				} catch (Exception e) {
 					System.out.println("try running command: mvn test");
 				}
@@ -82,6 +71,19 @@ public class Cli {
 			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
 		}
 
+	}
+
+	private static void mavenInvoke() throws MavenInvocationException {
+		InvocationRequest request = new DefaultInvocationRequest();
+		request.setPomFile(new File("pom.xml"));
+		request.setGoals(Collections.singletonList("test"));
+
+		Invoker invoker = new DefaultInvoker();
+		System.setProperty("maven.home", "/usr/share/maven");
+		InvocationResult ir = invoker.execute(request);
+		if (ir.getExitCode() != 0) {
+			System.err.println("mvn failed");
+		}
 	}
 
 	private static Options createOptions() {
