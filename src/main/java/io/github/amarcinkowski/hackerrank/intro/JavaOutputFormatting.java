@@ -13,7 +13,6 @@ public class JavaOutputFormatting extends Solution {
 	Scanner scanner;
 	
 	public void execute() {
-		logger.debug("execute");
 		scanner = new Scanner(System.in); 
 		System.out.println("================================");
 		for (int i = 0; i < 3; i++) {

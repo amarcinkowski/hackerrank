@@ -5,10 +5,9 @@ import org.slf4j.LoggerFactory;
 
 public class Solution implements Command {
 
+	private final static Logger logger = LoggerFactory.getLogger(Solution.class);
+
 	public final static String BASE_PACKAGE = Solution.class.getPackage().getName();
-
-	public final static Logger logger = LoggerFactory.getLogger(Solution.class);
-
 	public final static String IN_DATA_EXTENSION = ".in";
 	public final static String RESULT_EXTENSION = ".result";
 	public final static String EXPECTED_EXTENSION = ".expected";
