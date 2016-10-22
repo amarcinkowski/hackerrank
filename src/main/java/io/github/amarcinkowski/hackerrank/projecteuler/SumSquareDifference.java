@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.hackerrank.progress;
+package io.github.amarcinkowski.hackerrank.projecteuler;
 
 import java.util.Scanner;
 
