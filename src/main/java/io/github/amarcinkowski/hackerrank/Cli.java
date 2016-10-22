@@ -11,6 +11,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.log4j.Level;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.InvocationRequest;
@@ -20,7 +21,6 @@ import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.Level;
 import io.github.amarcinkowski.utils.LoggingUtils;
 
 public class Cli {
@@ -73,8 +73,8 @@ public class Cli {
 				String group = values[1];
 				String solutionClass = values[2];
 				String desc = values[3];
-				new SolutionBuilder().className(solutionClass).group(group).domain(domain).description(desc).createFile(true).fromTemplate(true).withInOutFiles(true)
-						.withJUnit(true).build();
+				new SolutionBuilder().className(solutionClass).group(group).domain(domain).description(desc)
+						.createFile(true).fromTemplate(true).withInOutFiles(true).withJUnit(true).build();
 			}
 
 		} catch (ParseException exp) {
