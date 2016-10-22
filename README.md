@@ -1,5 +1,8 @@
 # hackerrank [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
 my hackerrank solutions framework
+```bash
+run.sh
+```
 
 ```
  -c,--create <domain,group,class,description>   create solution from template
