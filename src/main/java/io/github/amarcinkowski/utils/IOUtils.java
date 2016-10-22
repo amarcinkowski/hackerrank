@@ -16,21 +16,21 @@ public class IOUtils {
 	public static final Logger logger = LoggerFactory.getLogger(IOUtils.class);
 
 	public static final void redirectInput(File in) throws FileNotFoundException {
-		logger.debug("Redirect stdin");
+		logger.trace("Redirect stdin");
 		FileInputStream is = null;
 		is = new FileInputStream(in);
 		System.setIn(is);
 	}
 
 	public static final void redirectOutput(File out) throws FileNotFoundException {
-		logger.debug("Redirect stdout");
+		logger.trace("Redirect stdout");
 		FileOutputStream fos = null;
 		fos = new FileOutputStream(out);
 		System.setOut(new PrintStream(new BufferedOutputStream(fos)));
 	}
 
 	public static void resetRedirectedIO() {
-		logger.debug("Reset redirected stdout");
+		logger.trace("Reset redirected stdout");
 		System.out.flush();
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 	}
@@ -38,7 +38,7 @@ public class IOUtils {
 	public final static void redirectIO(File in, File out) throws Exception {
 		redirectInput(in);
 		redirectOutput(out);
-		logger.debug("IO redirected");
+		logger.trace("IO redirected");
 	}
 
 }

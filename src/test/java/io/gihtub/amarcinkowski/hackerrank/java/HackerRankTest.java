@@ -117,7 +117,7 @@ public class HackerRankTest {
 		if (current != null) {
 			logger.info("Test: " + current.toString());
 			current.execute();
-			logger.debug("Solution executed");
+			logger.trace("Test done");
 		}
 	}
 
