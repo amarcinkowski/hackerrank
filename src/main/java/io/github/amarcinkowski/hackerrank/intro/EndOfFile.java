@@ -25,5 +25,5 @@ public class EndOfFile extends Solution {
 		}
 	}
 
-	// public static void main(String[] args) {new Solution().execute();}
+	public static void main(String[] args) {new Solution().execute();}
 }

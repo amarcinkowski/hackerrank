@@ -4,61 +4,62 @@ import java.util.Scanner;
 
 import io.github.amarcinkowski.hackerrank.Solution;
 
+
 class Flower {
-	public String whats_Your_Name() {
+	public String whatsYourName() {
 		return "I have many names and types";
 	}
 }
 
 class Jasmine extends Flower {
 	@Override
-	public String whats_Your_Name() {
+	public String whatsYourName() {
 		return "Jasmine";
 	}
 }
 
 class Lily extends Flower {
 	@Override
-	public String whats_Your_Name() {
+	public String whatsYourName() {
 		return "Lily";
 	}
 }
 
 class Lotus extends Flower {
 	@Override
-	public String whats_Your_Name() {
+	public String whatsYourName() {
 		return "Lotus";
 	}
 }
 
 class State {
-	public Flower your_National_Flower() {
+	public Flower yourNationalFlower() {
 		return new Flower();
 	}
 }
 
 class WestBengal extends State {
 	@Override
-	public Flower your_National_Flower() {
+	public Flower yourNationalFlower() {
 		return new Jasmine();
 	}
 }
 
 class Karnataka extends State {
 	@Override
-	public Flower your_National_Flower() {
+	public Flower yourNationalFlower() {
 		return new Lotus();
 	}
 }
 
 class AndhraPradesh extends State {
 	@Override
-	public Flower your_National_Flower() {
+	public Flower yourNationalFlower() {
 		return new Lily();
 	}
 }
 
-public class CovariantReturnTypes extends Solution {
+public class CovariantReturnTypes extends Solution { // hr (not public, no constructor): class CovariantReturnTypes 
 	public CovariantReturnTypes(String name) {
 		super(name);
 	} /*
@@ -79,7 +80,7 @@ public class CovariantReturnTypes extends Solution {
 				s = pack + s;
 			}
 			State state = (State) Class.forName(s).newInstance();
-			String flower = state.your_National_Flower().getClass().getName();
+			String flower = state.yourNationalFlower().getClass().getName();
 			flower = flower.replace(pack, "");
 			log(flower);
 			System.out.println(flower);
@@ -90,5 +91,5 @@ public class CovariantReturnTypes extends Solution {
 	}
 
 	// hr:
-	// public static void main(String[] args) {new Solution().execute();}
+	//	public static void main(String[] args) {new CovariantReturnTypes().execute();}
 }
