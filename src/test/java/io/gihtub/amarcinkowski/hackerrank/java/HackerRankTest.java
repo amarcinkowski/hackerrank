@@ -38,7 +38,11 @@ public class HackerRankTest {
 	@Before
 	public void setup() throws Exception {
 		logger.debug("setup: " + testName.getMethodName());
-		loadTest();
+		try {
+			loadTest();
+		} catch (Exception e) {
+			stopTesting();
+		}
 		IOUtils.redirectIO(FileUtils.getInFile(current.getName()), FileUtils.getResultFile(current.getName()));
 	}
 
@@ -48,26 +52,28 @@ public class HackerRankTest {
 		printNumOfDiffs();
 	}
 
+	private int getNumOfDiffs() throws IOException {
+		return FileUtils.diffsResultExpected(FileUtils.getResultFile(current.getName()),
+				FileUtils.getExpectedFile(current.getName()));
+	}
+
 	private void printNumOfDiffs() {
 		try {
-			int numOfDiffs = FileUtils.diffsResultExpected(FileUtils.getResultFile(current.getName()),
-					FileUtils.getExpectedFile(current.getName()));
-			boolean ok = (numOfDiffs == 0);
-			if (ok) {
+			if (getNumOfDiffs() == 0) {
 				logger.info(current + ": OK!");
+				Assert.assertTrue(true);
 			} else {
-				logger.warn("Num of differences: " + numOfDiffs + "/"
-						+ FileUtils.getExpectedFile(current.getName()).length());
+				logger.warn("Expected and Result differs");
+				Assert.fail();
 			}
-			Assert.assertTrue(ok);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
 
-	private final void stopTesting(String currentlyRuningTest) {
-		logger.error("Missing annotation:" + currentlyRuningTest);
+	private final void stopTesting() {
+		logger.error("Missing annotation:" + getCurrentlyRunningTest());
 		System.exit(0);
 	}
 
@@ -77,8 +83,12 @@ public class HackerRankTest {
 		}
 	}
 
-	private Method getCurrentlyRunningTest() throws NoSuchMethodException, SecurityException, ClassNotFoundException {
-		return Class.forName(testRule.className).getDeclaredMethod(testRule.methodName);
+	private Method getCurrentlyRunningTest() {
+		try {
+			return Class.forName(testRule.className).getDeclaredMethod(testRule.methodName);
+		} catch (NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			return null;
+		}
 	}
 
 	private TestInfo getTestInfo(Method currentlyRuningTest) throws MissingAnnotationException {

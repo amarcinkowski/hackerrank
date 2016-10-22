@@ -73,11 +73,8 @@ public class Cli {
 				String group = values[1];
 				String solutionClass = values[2];
 				String desc = values[3];
-				String canonical = String.format("io.github.amarcinkowski.hackerrank.%s.%s", group, solutionClass);
-				new SolutionBuilder().fromCanonical(canonical).createFile(true).fromTemplate(true).build().getClass();
-				System.out.println(canonical + "created");
-				// ChromeExecutor.saveAndCloseAll(new JobType(url, taskName),
-				// startIndex, endIndex);
+				new SolutionBuilder().className(solutionClass).group(group).domain(domain).description(desc).createFile(true).fromTemplate(true).withInOutFiles(true)
+						.withJUnit(true).build();
 			}
 
 		} catch (ParseException exp) {
@@ -93,24 +90,18 @@ public class Cli {
 		Option quiet = new Option("q", "quiet", false, "be extra quiet");
 		Option verbose = new Option("d", "debug", false, "be extra verbose");
 
-		Option xxx = Option.builder("r").longOpt("run").desc("run mvn test").build();
+		Option run = Option.builder("r").longOpt("run").desc("run mvn test").build();
 
 		Option create = Option.builder("c").longOpt("create").numberOfArgs(3).argName("domain,group,class,description")
 				.valueSeparator(',').hasArgs().desc("create solution from template").build();
-
-		// Option save =
-		// Option.builder("s").longOpt("save").numberOfArgs(4).argName("url,task,start,end")
-		// .valueSeparator(',').hasArgs().desc("save tabs in chrome to txt
-		// files").build();
 
 		Options options = new Options();
 		options.addOption(help);
 		options.addOption(version);
 		options.addOption(quiet);
 		options.addOption(verbose);
-		options.addOption(xxx);
+		options.addOption(run);
 		options.addOption(create);
-		// options.addOption(save);
 		return options;
 	}
 

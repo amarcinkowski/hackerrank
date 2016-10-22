@@ -44,7 +44,7 @@ public class FileUtils {
 
 	public static void createFileIfNotExisting(File f) throws IOException {
 		if (!f.exists()) {
-			logger.error(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
+			logger.debug(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
 			f.createNewFile();
 		} else if (f.length() == 0) {
 			logger.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
