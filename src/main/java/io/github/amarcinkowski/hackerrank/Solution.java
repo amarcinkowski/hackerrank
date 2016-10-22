@@ -26,7 +26,7 @@ public class Solution implements Command {
 		throw new NotImplementedException();
 	}
 
-	protected void log(Object log) {
+	protected static void log(Object log) {
 		if (System.getenv("LOGNAME").equals("amarcinkowski")) {
 			logger.debug(log.toString());
 		}
