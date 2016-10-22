@@ -10,6 +10,8 @@ public class SolutionUtils {
 
 	private static final String SRC_DIR = "src/main/java";
 
+	private static final String TEST_DIR = "src/test/java/io/gihtub/amarcinkowski/hackerrank/java/tests";
+
 	private static final String SLASH = "/";
 
 	private static final String DOT = ".";
@@ -23,7 +25,7 @@ public class SolutionUtils {
 	}
 
 	private final static String getTestResourcesFilepath(String subdir, String filename) {
-		return String.format(SYS_PATH, SolutionUtils.TEST_RESOURCES_FILEPATH, subdir, filename);
+		return String.format(SYS_PATH, TEST_RESOURCES_FILEPATH, subdir, filename);
 	}
 
 	private final static String getPackage(String canonical) {
@@ -42,9 +44,13 @@ public class SolutionUtils {
 	}
 
 	public static File getJavaFile(String canonical) {
-		String dir = canonical.replace(SolutionUtils.DOT, SolutionUtils.SLASH);
-		String path = String.format(SolutionUtils.FILEPATH_FORMAT_STRING, SolutionUtils.SRC_DIR, dir,
-				SolutionUtils.JAVA_EXT);
+		String dir = canonical.replace(DOT, SLASH);
+		String path = String.format(FILEPATH_FORMAT_STRING, SRC_DIR, dir, JAVA_EXT);
+		return new File(path);
+	}
+
+	public static File getJUnitFile(String group) {
+		String path = String.format(FILEPATH_FORMAT_STRING, TEST_DIR, group, JAVA_EXT);
 		return new File(path);
 	}
 

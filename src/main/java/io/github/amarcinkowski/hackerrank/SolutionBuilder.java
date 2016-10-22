@@ -36,22 +36,26 @@ public class SolutionBuilder {
 		return Files.lines(Paths.get(filepath));
 	}
 
-	private void addJUnitTest(File file) throws IOException {
+	private void appendMethodToTestSuite(String group) throws IOException {
+		File file = SolutionUtils.getJUnitFile(group);
+		String truncated = FileUtils.truncateFile(file.getAbsolutePath(), CLASS_ENDING_PATTERN);
+		String method = TemplateUtils.getRenderedTemplate(domainName, groupName, className, hackerrankDescription);
+		String contents = new StringBuilder().append(truncated).append(method).append(CLASS_END).toString();
+		Files.write(Paths.get(file.getAbsolutePath()), contents.getBytes());
+	}
+
+	private void addJUnitTest(String group) throws IOException {
 		if (addJUnit) {
-			String truncated = FileUtils.truncateFile(file.getAbsolutePath(), CLASS_ENDING_PATTERN);
-			String method = TemplateUtils.getRenderedTemplate(domainName, groupName, className, hackerrankDescription);
-			String contents = new StringBuilder().append(truncated).append(method).append(CLASS_END).toString();
-			Files.write(Paths.get(file.getAbsolutePath()), contents.getBytes());
+			appendMethodToTestSuite(group);
 		}
 	}
 
 	public Solution build() throws IOException {
-		logger.debug("building new solution");
 		File classFile = SolutionUtils.getJavaFile(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);
 		createInOutFiles();
-		addJUnitTest(classFile);
+		addJUnitTest(groupName);
 		return new Solution(getCanonical());
 	}
 
