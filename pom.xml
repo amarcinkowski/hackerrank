@@ -1,11 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>hackerrank</artifactId>
-	<version>0.0.9-SNAPSHOT</version>
+	<version>0.0.10-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<scm>
 		<connection>scm:git:https://github.com/amarcinkowski/hackerrank</connection>
-    </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<properties>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.1.6</logback.version>
@@ -26,9 +28,7 @@
 				<version>2.19.1</version>
 				<configuration>
 					<includes>
-						<include>**/Advanced.java</include>
-						<include>**/Intro.java</include>
-						<include>**/ProjectEuler.java</include>
+						<include>**/tests/*.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -48,8 +48,8 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>make-assembly</id> <!-- this is used for inheritance merges -->
-						<phase>package</phase> <!-- bind to the packaging phase -->
+						<id>make-assembly</id>
+						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
