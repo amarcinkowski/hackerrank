@@ -10,15 +10,15 @@ public class JavaStaticInitializerBlock extends Solution {
 	} /*
 		 * COPY FROM LINE BELOW:
 		 * 
-		 * private static void log(String msg) {} /*
+		 * private void log(String msg) {} /*
 		 */
 
-	static Scanner scanner;
+	Scanner scanner;
 
 	static int H, B;
 	static boolean flag;
 
-	static {
+	public void execute() {
 		log("execute");
 		scanner = new Scanner(System.in);
 		H = scanner.nextInt();
@@ -32,12 +32,7 @@ public class JavaStaticInitializerBlock extends Solution {
 		}
 	}
 
-	public static void main(String[] args) {
-		if (flag) {
-			int area = B * H;
-			System.out.print(area);
-		}
-
-	}// end of main
+	// uncomment in hr:
+	// static { new Solution().execute(); }
 
 }

@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 import io.github.amarcinkowski.hackerrank.Solution;
 
-public class JavaLoops extends Solution {
+public class JavaLoops2 extends Solution {
 
-	public JavaLoops(String name) {
+	public JavaLoops2(String name) {
 		super(name);
 	}
 
-	protected void log(String log) {}
-	Scanner scanner;
+    protected static void log(String log) {}
+	static Scanner scanner;
 
 	public void execute() {
 		scanner = new Scanner(System.in);
@@ -25,7 +25,7 @@ public class JavaLoops extends Solution {
 		}
 	}
 
-	private void compute(int a, int b, int n) {
+	private static void compute(int a, int b, int n) {
 		log("a" + a + " b" + b + " n" + n);
 		int result = 0;
 		StringBuilder resultString = new StringBuilder();
@@ -38,5 +38,8 @@ public class JavaLoops extends Solution {
 		System.out.println(resultString.toString());
 		log(resultString.toString());
 	}
+    
+// hr:
+	public static void main(String[] args) {new Solution().execute();}
 
 }

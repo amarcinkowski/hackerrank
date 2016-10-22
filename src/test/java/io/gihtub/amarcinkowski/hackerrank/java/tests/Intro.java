@@ -26,7 +26,7 @@ public class Intro extends HackerRankTest {
 	}
 
 	@Test
-	@TestInfo(domain = "java", group = "intro", solutionClass = "JavaLoops", hackerrankDescription = "Java Loops")
+	@TestInfo(domain = "java", group = "intro", solutionClass = "JavaLoops2", hackerrankDescription = "Java Loops II")
 	public void javaLoops() {
 		runTest();
 	}
@@ -48,5 +48,12 @@ public class Intro extends HackerRankTest {
 	public void javaStaticInitializerBlock() {
 		runTest();
 	}
+	
+	@Test
+	@TestInfo(domain = "java", group = "intro", solutionClass = "JavaLoops1", hackerrankDescription = "Java Loops I")
+	public void javaLoops1() {
+		runTest();
+	}
+
 
 }
