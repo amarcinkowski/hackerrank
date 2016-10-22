@@ -6,16 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.github.amarcinkowski.utils.FileUtils;
 import io.github.amarcinkowski.utils.SolutionUtils;
 import io.github.amarcinkowski.utils.TemplateUtils;
 
 public class SolutionBuilder {
-
-	private static final Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
 	private static final String CANONICAL_FORMAT_STRING = "%s.%s";
 	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.hackerrank.%s";

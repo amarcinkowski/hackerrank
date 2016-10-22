@@ -1,6 +1,5 @@
 package io.github.amarcinkowski.hackerrank;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,7 @@ public class Solution implements Command {
 	}
 
 	public Solution() {
-		throw new NotImplementedException("used for HR compatibility");
+		throw new NotImplementedException();
 	}
 
 	protected void log(Object log) {

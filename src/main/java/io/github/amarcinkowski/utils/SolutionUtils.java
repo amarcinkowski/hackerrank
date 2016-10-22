@@ -2,6 +2,8 @@ package io.github.amarcinkowski.utils;
 
 import java.io.File;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SolutionUtils {
 
 	private static final String SYS_PATH = "%s/%s/%s";
@@ -50,7 +52,8 @@ public class SolutionUtils {
 	}
 
 	public static File getJUnitFile(String group) {
-		String path = String.format(FILEPATH_FORMAT_STRING, TEST_DIR, group, JAVA_EXT);
+		String junit = StringUtils.capitalize(group);
+		String path = String.format(FILEPATH_FORMAT_STRING, TEST_DIR, junit, JAVA_EXT);
 		return new File(path);
 	}
 
