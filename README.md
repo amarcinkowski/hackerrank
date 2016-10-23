@@ -1,14 +1,16 @@
-# hackerrank [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank) [ ![Download](https://api.bintray.com/packages/amarcinkowski/amarcinkowski-repo/fastxpathaccess/images/download.svg) ](https://bintray.com/amarcinkowski/amarcinkowski-repo/fastxpathaccess/_latestVersion)
+# hackerrank [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
 my hackerrank solutions framework
 
 ### run.sh
 
 ```
- -c,--create <domain,group,class,description>   create solution from template
- -d,--debug                                     be extra verbose
- -h,--help                                      print this message
- -q,--quiet                                     be extra quiet
- -r,--run                                       run mvn test
- -v,--version                                   print the version
-                                                information and exit
+ -c,--create <domain,subdomain,class,description>   create solution from  template
+ -d,--debug                                         be extra verbose
+ -g,--generate-all <domain,subdomain>               generate template for all unsolved challenges
+ -h,--help                                          print this message
+ -l,--list                                          list available domains |- subdomains (slug)
+ -q,--quiet                                         be extra quiet
+ -r,--run                                           run mvn test
+ -u,--unsolved <domain,subdomain>                   list yet unsolved challenges
+ -v,--version                                       print the version information and exit
 ```
