@@ -1,4 +1,4 @@
-# hackerrank [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
+# hackerrank [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank) [ ![Download](https://api.bintray.com/packages/amarcinkowski/amarcinkowski-repo/fastxpathaccess/images/download.svg) ](https://bintray.com/amarcinkowski/amarcinkowski-repo/fastxpathaccess/_latestVersion)
 my hackerrank solutions framework
 
 ### run.sh
