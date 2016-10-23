@@ -2,7 +2,14 @@ package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -21,13 +28,24 @@ import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.amarcinkowski.hackerrank.browser.ChromeExecutor;
+import io.github.amarcinkowski.hackerrank.browser.RobotHelper;
 import io.github.amarcinkowski.utils.LoggingUtils;
 
 public class Cli {
 
 	final Logger logger = LoggerFactory.getLogger(Cli.class);
 
-	public static void main(String[] args) throws IOException, MavenInvocationException {
+	public static List<String> findAllMultiline(String pattern, String content) {
+		List<String> list = new ArrayList<>();
+		Matcher m = Pattern.compile(pattern, Pattern.DOTALL).matcher(content);
+		while (m.find()) {
+			list.add(m.group(1));
+		}
+		return list;
+	}
+
+	public static void main(String[] args) throws IOException, MavenInvocationException, XPathExpressionException {
 
 		Options options = createOptions();
 
@@ -54,6 +72,25 @@ public class Cli {
 				} catch (Exception e) {
 					System.out.println("try running command: mvn test");
 				}
+			}
+
+			if (line.hasOption("unsolved")) {
+				String[] values = line.getOptionValues("u");
+				String domain = values[0];
+				String subdomain = values[1];
+				ChromeExecutor.openBrowser(domain, subdomain);
+				String pageContent = RobotHelper.getPageContent();
+				String p = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
+				System.out.println(findAllMultiline(p, pageContent));
+			}
+
+			if (line.hasOption("list")) {
+				ChromeExecutor.openBrowser("java", "java-introduction");
+				String source = RobotHelper.getSource();
+				RobotHelper.closePage();
+				String p = "HR.PREFETCH_DATA =(.*);[ \n]+HR.MANIFEST_HASH";
+				String json = findAllMultiline(p, source).stream().collect(Collectors.joining());
+				System.out.println(HackerrankJson.hackerrankJsonToList(json));
 			}
 
 			if (line.hasOption("create")) {
@@ -94,8 +131,12 @@ public class Cli {
 
 		Option run = Option.builder("r").longOpt("run").desc("run mvn test").build();
 
-		Option create = Option.builder("c").longOpt("create").numberOfArgs(3).argName("domain,group,class,description")
-				.valueSeparator(',').hasArgs().desc("create solution from template").build();
+		Option create = Option.builder("c").longOpt("create").numberOfArgs(3)
+				.argName("domain,subdomain,class,description").valueSeparator(',').hasArgs()
+				.desc("create solution from template").build();
+		Option list = Option.builder("l").longOpt("list").desc("list available domains |- subdomains (slug)").build();
+		Option uns = Option.builder("u").longOpt("unsolved").numberOfArgs(2).argName("domain,subdomain")
+				.valueSeparator(',').hasArgs().desc("list yet unsolved challenges").build();
 
 		Options options = new Options();
 		options.addOption(help);
@@ -104,6 +145,8 @@ public class Cli {
 		options.addOption(verbose);
 		options.addOption(run);
 		options.addOption(create);
+		options.addOption(list);
+		options.addOption(uns);
 		return options;
 	}
 
