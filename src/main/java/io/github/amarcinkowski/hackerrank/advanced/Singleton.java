@@ -36,5 +36,5 @@ public Singleton(String name) {super(name);}	/*
 	}
 
 // hr:
-//	public static void main(String[] args) {new Solution().execute();}
+	public static void main(String[] args) {new Singleton().execute();}
 }
