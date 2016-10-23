@@ -2,6 +2,7 @@ package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -81,6 +82,15 @@ public class Cli {
 				System.out.println(unsolved(domain, subdomain));
 			}
 
+			if (line.hasOption("generate-all")) {
+				String[] values = line.getOptionValues("g");
+				String domain = values[0];
+				String subdomain = values[1];
+				for (String s : unsolved(domain, subdomain)) {
+					create(normalize(s), subdomain.replace("java-", ""), domain, domain + subdomain + s);
+				}
+			}
+
 			if (line.hasOption("list")) {
 				list();
 			}
@@ -99,6 +109,11 @@ public class Cli {
 			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
 		}
 
+	}
+
+	private static String normalize(String string) {
+		string = Normalizer.normalize(string, Normalizer.Form.NFD);
+		return string.replaceAll("[^\\x00-\\x7F \\-]", "");
 	}
 
 	private static List<String> unsolved(String domain, String subdomain) {
@@ -150,6 +165,9 @@ public class Cli {
 		Option uns = Option.builder("u").longOpt("unsolved").numberOfArgs(2).argName("domain,subdomain")
 				.valueSeparator(',').hasArgs().desc("list yet unsolved challenges").build();
 
+		Option gen = Option.builder("g").longOpt("generate-all").numberOfArgs(2).argName("domain,subdomain")
+				.valueSeparator(',').hasArgs().desc("generate template for all unsolved challenges").build();
+
 		Options options = new Options();
 		options.addOption(help);
 		options.addOption(version);
@@ -159,6 +177,7 @@ public class Cli {
 		options.addOption(create);
 		options.addOption(list);
 		options.addOption(uns);
+		options.addOption(gen);
 		return options;
 	}
 
