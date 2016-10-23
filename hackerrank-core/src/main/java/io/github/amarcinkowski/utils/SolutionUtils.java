@@ -10,9 +10,9 @@ public class SolutionUtils {
 
 	private final static String TEST_RESOURCES_FILEPATH = "src/test/resources";
 
-	private static final String SRC_DIR = "src/main/java";
+	private static final String SRC_DIR = "solution-module/src/main/java";
 
-	private static final String TEST_DIR = "src/test/java/io/gihtub/amarcinkowski/hackerrank/java/tests";
+	private static final String TEST_DIR = "solution-module/src/test/java/io/gihtub/amarcinkowski/hackerrank/java/tests";
 
 	private static final String SLASH = "/";
 

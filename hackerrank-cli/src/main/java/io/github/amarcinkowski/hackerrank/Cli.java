@@ -113,9 +113,8 @@ public class Cli {
 	}
 	
 	private static void create(String className, String domain, String subdomain, String desc) throws IOException {
-//		SolutionBuilder builder = new SolutionBuilder();
-//		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
-		// TODO build solution
+		SolutionBuilder builder = new SolutionBuilder();
+		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
 	}
 
 	private static List<String> unsolved(String domain, String subdomain) {
