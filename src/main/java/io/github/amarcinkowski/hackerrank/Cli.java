@@ -78,19 +78,11 @@ public class Cli {
 				String[] values = line.getOptionValues("u");
 				String domain = values[0];
 				String subdomain = values[1];
-				ChromeExecutor.openBrowser(domain, subdomain);
-				String pageContent = RobotHelper.getPageContent();
-				String p = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
-				System.out.println(findAllMultiline(p, pageContent));
+				System.out.println(unsolved(domain, subdomain));
 			}
 
 			if (line.hasOption("list")) {
-				ChromeExecutor.openBrowser("java", "java-introduction");
-				String source = RobotHelper.getSource();
-				RobotHelper.closePage();
-				String p = "HR.PREFETCH_DATA =(.*);[ \n]+HR.MANIFEST_HASH";
-				String json = findAllMultiline(p, source).stream().collect(Collectors.joining());
-				System.out.println(HackerrankJson.hackerrankJsonToList(json));
+				list();
 			}
 
 			if (line.hasOption("create")) {
@@ -99,8 +91,7 @@ public class Cli {
 				String group = values[1];
 				String solutionClass = values[2];
 				String desc = values[3];
-				new SolutionBuilder().className(solutionClass).group(group).domain(domain).description(desc)
-						.createFile(true).fromTemplate(true).withInOutFiles(true).withJUnit(true).build();
+				create(solutionClass, group, domain, desc);
 			}
 
 		} catch (ParseException exp) {
@@ -108,6 +99,27 @@ public class Cli {
 			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
 		}
 
+	}
+
+	private static List<String> unsolved(String domain, String subdomain) {
+		ChromeExecutor.openBrowser(domain, subdomain);
+		String pageContent = RobotHelper.getPageContent();
+		String p = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
+		return findAllMultiline(p, pageContent);
+	}
+
+	private static void list() {
+		ChromeExecutor.openBrowser("java", "java-introduction");
+		String source = RobotHelper.getSource();
+		RobotHelper.closePage();
+		String p = "HR.PREFETCH_DATA =(.*);[ \n]+HR.MANIFEST_HASH";
+		String json = findAllMultiline(p, source).stream().collect(Collectors.joining());
+		System.out.println(HackerrankJson.hackerrankJsonToList(json));
+	}
+
+	private static void create(String solutionClass, String group, String domain, String desc) throws IOException {
+		new SolutionBuilder().className(solutionClass).group(group).domain(domain).description(desc).createFile(true)
+				.fromTemplate(true).withInOutFiles(true).withJUnit(true).build();
 	}
 
 	private static void mavenInvoke() throws MavenInvocationException {
