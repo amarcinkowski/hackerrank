@@ -113,7 +113,7 @@ public class Cli {
 
 	private static String normalize(String string) {
 		string = Normalizer.normalize(string, Normalizer.Form.NFD);
-		return string.replaceAll("[^\\x00-\\x7F \\-]", "");
+		return string.replaceAll("[^\\x00-\\x7F]", "").replaceAll("[ -]", "");
 	}
 
 	private static List<String> unsolved(String domain, String subdomain) {
