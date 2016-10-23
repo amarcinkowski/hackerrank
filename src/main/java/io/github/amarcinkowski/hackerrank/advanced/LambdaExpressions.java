@@ -8,18 +8,18 @@ import java.util.StringTokenizer;
 
 import io.github.amarcinkowski.hackerrank.Solution;
 
-interface performOperation {
-	int check(int a);
+interface PerformOperation {
+	boolean check(int a);
 }
 
 class Math {
 	
 
-	public static int checker(performOperation p, int num) {
+	public static boolean checker(PerformOperation p, int num) {
 		return p.check(num);
 	}
 	
-	private static boolean isPrime(int num) {
+	private static boolean prime(int num) {
 		if (num < 2)
 			return false;
 		if (num == 2)
@@ -32,23 +32,23 @@ class Math {
 		return true;
 	}
 
-	private static boolean isPalindrome(int num) {
+	private static boolean palindrome(int num) {
 		String s1 = "" + num;
 		String s2 = new StringBuilder().append(num).reverse().toString();
 		return s1.equals(s2);
 	}
 
 
-	public performOperation checkEvenOdd() {
-		return num -> (num % 2 == 0 ? 0 : 1);
+	public PerformOperation is_odd() {
+		return num -> (num % 2 == 1);
 	}
 
-	public performOperation checkPrime() {
-		return num -> (isPrime(num) ? 0 : 1);
+	public PerformOperation is_prime() {
+		return num -> (prime(num));
 	}
 
-	public performOperation checkPalindrome() {
-		return num -> (isPalindrome(num) ? 0 : 1);
+	public PerformOperation is_palindrome() {
+		return num -> (palindrome(num));
 	}
 }
 
@@ -71,8 +71,8 @@ public class LambdaExpressions extends Solution {
 		int T;
 		try {
 			T = Integer.parseInt(br.readLine());
-			performOperation op;
-			int ret = 0;
+			PerformOperation op;
+			boolean ret = false;
 			String ans = null;
 			while (T-- > 0) {
 				String s = br.readLine().trim();
@@ -80,17 +80,17 @@ public class LambdaExpressions extends Solution {
 				int ch = Integer.parseInt(st.nextToken());
 				int num = Integer.parseInt(st.nextToken());
 				if (ch == 1) {
-					op = ob.checkEvenOdd();
+					op = ob.is_odd();
 					ret = ob.checker(op, num);
-					ans = (ret == 0) ? "EVEN" : "ODD";
+					ans = (ret) ? "EVEN" : "ODD";
 				} else if (ch == 2) {
-					op = ob.checkPrime();
+					op = ob.is_prime();
 					ret = ob.checker(op, num);
-					ans = (ret == 0) ? "PRIME" : "COMPOSITE";
+					ans = (ret) ? "PRIME" : "COMPOSITE";
 				} else if (ch == 3) {
-					op = ob.checkPalindrome();
+					op = ob.is_palindrome();
 					ret = ob.checker(op, num);
-					ans = (ret == 0) ? "PALINDROME" : "NOT PALINDROME";
+					ans = (ret) ? "PALINDROME" : "NOT PALINDROME";
 
 				}
 				System.out.println(ans);
