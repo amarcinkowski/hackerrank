@@ -3,6 +3,8 @@ package io.github.amarcinkowski.utils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,12 +17,12 @@ import org.slf4j.LoggerFactory;
 import io.github.amarcinkowski.hackerrank.SolutionBuilder;
 
 public class FileUtils {
-	
+
 	public final static String IN_DATA_EXTENSION = ".in";
 	public final static String RESULT_EXTENSION = ".result";
 	public final static String EXPECTED_EXTENSION = ".expected";
 
-	final static Logger logger = LoggerFactory.getLogger(FileUtils.class);
+	private final static Logger logger = LoggerFactory.getLogger(FileUtils.class);
 
 	public static int diffsResultExpected(File f1, File f2) throws IOException {
 		if (!FileUtils.filesSame(f1, f2)) {
@@ -52,7 +54,13 @@ public class FileUtils {
 	public static void createFileIfNotExisting(File f) throws IOException {
 		if (!f.exists()) {
 			logger.debug(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
-			f.createNewFile();
+			try {
+				Path path = Paths.get(f.getAbsolutePath());
+				Files.createDirectories(path.getParent());
+				Files.createFile(path);
+			} catch (Exception e) {
+				logger.debug(String.format("Cannot create: ", f.getAbsolutePath()));
+			}
 		} else if (f.length() == 0) {
 			logger.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
 			System.exit(0);
