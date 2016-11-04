@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import io.github.amarcinkowski.solutionframework.exception.MissingAnnotationException;
 import io.github.amarcinkowski.utils.FileUtils;
 import io.github.amarcinkowski.utils.IOUtils;
+import io.github.amarcinkowski.utils.StringUtils;
 
 public class SolutionTestSuite {
 
@@ -97,8 +98,8 @@ public class SolutionTestSuite {
 	}
 
 	static String getCanonical(TestInfo ti) {
-		String packageName = String.format("%s.%s", Solution.PACKAGE, ti.platform());
-		return getCanonical(packageName, ti.group(), ti.solutionClass());
+		String packageBase = String.format("%s.%s", Solution.PACKAGE, ti.platform());
+		return getCanonical(packageBase, StringUtils.packagify(ti.group()), ti.solutionClass());
 	}
 
 	static String getCanonical(String packagebase, String packagename, String classname) {

@@ -64,10 +64,11 @@ public class Cli {
 				String[] values = line.getOptionValues("g");
 				String domain = values[0];
 				String subdomain = values[1];
-				for (String s : HackerrankJson.unsolved(domain, subdomain)) {
+				for (String challenge : HackerrankJson.unsolved(domain, subdomain)) {
+					String challengeNormalized = StringUtils.normalize(challenge);
 					String domainNormalized = StringUtils.normalize(domain);
 					String subdomainNormalized = StringUtils.normalize(subdomain);
-					create(StringUtils.normalize(s), domainNormalized, subdomainNormalized, domain + subdomain + s);
+					create(challengeNormalized, domainNormalized, subdomainNormalized, domain + subdomain + challenge);
 				}
 			}
 
