@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.hackerrank.advanced;
+package io.github.amarcinkowski.hackerrank.javaadvanced;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -26,7 +26,7 @@ public class CanYouAccess extends Solution {
 			System.out.printf("%d is %s\n", num, s);
 
 			System.out.println("An instance of class: " + o.getClass().getCanonicalName()
-					.replaceAll("com.hackerrank.java.advanced.CanYouAccess.", "Solution.") + " has been created");
+					.replaceAll("io.github.amarcinkowski.hackerrank.javaadvanced.CanYouAccess.", "Solution.") + " has been created");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
