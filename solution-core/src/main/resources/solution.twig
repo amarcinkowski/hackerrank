@@ -1,10 +1,10 @@
-package io.github.amarcinkowski.hackerrank.intro;
+package {{ PACKAGE }};
 
 import java.util.Scanner;
 import io.github.amarcinkowski.solutionframework.Solution;
 
-public class JavaLoops1 extends Solution {
-public JavaLoops1(String name) {super(name);}	/*
+public class {{ CLASSNAME }} extends Solution {
+public {{ CLASSNAME }}(String name) {super(name);}	/*
 * overloaded log:
 
 	private static void log(String msg) {}
@@ -15,12 +15,7 @@ public JavaLoops1(String name) {super(name);}	/*
 	public void execute() {
 		log("execute");
 		scanner = new Scanner(System.in);
-		int N = scanner.nextInt();
-        long result = 0;
-		for(int i = 1; i <= 10; i++) {
-            result += N; 
-			System.out.println(String.format("%d x %d = %d", N, i, result));
-		}
+		int x = scanner.nextInt();
 	}
 
 // hr:

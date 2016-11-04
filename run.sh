@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ ! -d "hackerrank-cli/target/" ]; then
+if [ ! -d "solution-cli/target/" ]; then
 	echo "target/ dir is missing. Build app with: mvn install";
 	exit 0;
 fi
-java -jar hackerrank-cli/target/jt.jar "$@"
+java -jar solution-cli/target/jt.jar "$@"

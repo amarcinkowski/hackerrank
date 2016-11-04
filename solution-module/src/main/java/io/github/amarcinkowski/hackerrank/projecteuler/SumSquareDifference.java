@@ -2,7 +2,7 @@ package io.github.amarcinkowski.hackerrank.projecteuler;
 
 import java.util.Scanner;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 public class SumSquareDifference extends Solution {
 	public SumSquareDifference(String name) {

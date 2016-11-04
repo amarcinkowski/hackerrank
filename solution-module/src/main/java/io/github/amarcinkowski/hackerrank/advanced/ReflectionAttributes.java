@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 public class ReflectionAttributes extends Solution {
 	public ReflectionAttributes(String name) {

@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 
 @Target(ElementType.METHOD)

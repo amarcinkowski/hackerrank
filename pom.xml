@@ -48,8 +48,8 @@
 	</repositories>
 
 	<modules>
-		<module>hackerrank-core</module>
+		<module>solution-core</module>
 		<module>solution-module</module>
-		<module>hackerrank-cli</module>
+		<module>solution-cli</module>
 	</modules>
 </project>

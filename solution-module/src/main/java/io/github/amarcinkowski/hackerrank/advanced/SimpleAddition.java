@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 public class SimpleAddition extends Solution {
 public SimpleAddition(String name) {super(name);}	/*

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 interface PerformOperation {
 	boolean check(int a);

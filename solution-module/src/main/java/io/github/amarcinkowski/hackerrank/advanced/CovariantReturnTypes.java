@@ -2,7 +2,7 @@ package io.github.amarcinkowski.hackerrank.advanced;
 
 import java.util.Scanner;
 
-import io.github.amarcinkowski.hackerrank.Solution;
+import io.github.amarcinkowski.solutionframework.Solution;
 
 
 class Flower {
