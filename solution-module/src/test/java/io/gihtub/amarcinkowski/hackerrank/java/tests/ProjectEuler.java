@@ -2,10 +2,10 @@ package io.gihtub.amarcinkowski.hackerrank.java.tests;
 
 import org.junit.Test;
 
-import io.gihtub.amarcinkowski.hackerrank.java.HackerRankTest;
+import io.github.amarcinkowski.hackerrank.SolutionTestSuite;
 import io.github.amarcinkowski.hackerrank.TestInfo;
 
-public class ProjectEuler extends HackerRankTest {
+public class ProjectEuler extends SolutionTestSuite {
 
 	@Test
 	@TestInfo(domain = "java", group = "projecteuler", solutionClass = "MultiplesOf3and5", hackerrankDescription = "Project Euler #1: Multiples of 3 and 5", done = true)

@@ -1,4 +1,4 @@
-package io.gihtub.amarcinkowski.hackerrank.java;
+package io.github.amarcinkowski.hackerrank;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -6,9 +6,9 @@ import org.junit.runners.model.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestSettings implements TestRule {
+public class SolutionTestSettings implements TestRule {
 
-	public static final Logger logger = LoggerFactory.getLogger(TestSettings.class);
+	public static final Logger logger = LoggerFactory.getLogger(SolutionTestSettings.class);
 	String className, methodName;
 
 	@Override

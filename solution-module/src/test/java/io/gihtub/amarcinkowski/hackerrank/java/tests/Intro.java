@@ -2,10 +2,10 @@ package io.gihtub.amarcinkowski.hackerrank.java.tests;
 
 import org.junit.Test;
 
-import io.gihtub.amarcinkowski.hackerrank.java.HackerRankTest;
+import io.github.amarcinkowski.hackerrank.SolutionTestSuite;
 import io.github.amarcinkowski.hackerrank.TestInfo;
 
-public class Intro extends HackerRankTest {
+public class Intro extends SolutionTestSuite {
 
 	@Test
 	@TestInfo(domain = "java", group = "intro", solutionClass = "IfElse", hackerrankDescription = "Java If-Else")

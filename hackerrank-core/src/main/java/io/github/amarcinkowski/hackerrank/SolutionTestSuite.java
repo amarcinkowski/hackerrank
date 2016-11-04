@@ -1,4 +1,4 @@
-package io.gihtub.amarcinkowski.hackerrank.java;
+package io.github.amarcinkowski.hackerrank;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -11,16 +11,13 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.slf4j.LoggerFactory;
 
-import io.github.amarcinkowski.hackerrank.Solution;
-import io.github.amarcinkowski.hackerrank.SolutionFactory;
-import io.github.amarcinkowski.hackerrank.TestInfo;
 import io.github.amarcinkowski.hackerrank.exception.MissingAnnotationException;
 import io.github.amarcinkowski.utils.FileUtils;
 import io.github.amarcinkowski.utils.IOUtils;
 
-public class HackerRankTest {
+public class SolutionTestSuite {
 
-	public static final org.slf4j.Logger logger = LoggerFactory.getLogger(HackerRankTest.class);
+	public static final org.slf4j.Logger logger = LoggerFactory.getLogger(SolutionTestSuite.class);
 
 	private SolutionFactory factory = new SolutionFactory();
 
@@ -30,7 +27,7 @@ public class HackerRankTest {
 	public TestName testName = new TestName();
 
 	@Rule
-	public TestSettings testRule = new TestSettings();
+	public SolutionTestSettings testRule = new SolutionTestSettings();
 
 	@BeforeClass
 	public static void beforeClass() {
