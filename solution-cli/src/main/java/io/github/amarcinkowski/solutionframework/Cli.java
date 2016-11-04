@@ -1,9 +1,6 @@
 package io.github.amarcinkowski.solutionframework;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Properties;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -20,20 +17,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.amarcinkowski.solutionframework.SolutionBuilder;
-import io.github.amarcinkowski.solutionframework.browser.ChromeExecutor;
 import io.github.amarcinkowski.solutionframework.browser.HackerrankPageReader;
-import io.github.amarcinkowski.solutionframework.browser.RobotHelper;
 import io.github.amarcinkowski.utils.LoggingUtils;
 import io.github.amarcinkowski.utils.MavenUtils;
 import io.github.amarcinkowski.utils.StringUtils;
+import io.github.amarcinkowski.utils.VersionUtils;
 
 public class Cli {
 
-	private static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
-	final Logger logger = LoggerFactory.getLogger(Cli.class);
+	private final static Logger logger = LoggerFactory.getLogger(Cli.class);
 
 	public static void main(String[] args) throws IOException, MavenInvocationException, XPathExpressionException {
-
+		logger.trace("main");
 		Options options = createOptions();
 
 		// create the parser
@@ -62,15 +57,17 @@ public class Cli {
 				String[] values = line.getOptionValues("u");
 				String domain = values[0];
 				String subdomain = values[1];
-				System.out.println(unsolved(domain, subdomain));
+				System.out.println(HackerrankJson.unsolved(domain, subdomain));
 			}
 
 			if (line.hasOption("generate-all")) {
 				String[] values = line.getOptionValues("g");
 				String domain = values[0];
 				String subdomain = values[1];
-				for (String s : unsolved(domain, subdomain)) {
-					create(StringUtils.normalize(s), domain, subdomain.replace("java-", ""), domain + subdomain + s);
+				for (String s : HackerrankJson.unsolved(domain, subdomain)) {
+					String domainNormalized = StringUtils.normalize(domain);
+					String subdomainNormalized = StringUtils.normalize(subdomain);
+					create(StringUtils.normalize(s), domainNormalized, subdomainNormalized, domain + subdomain + s);
 				}
 			}
 
@@ -79,7 +76,7 @@ public class Cli {
 			}
 
 			if (line.hasOption("version")) {
-				printVersion();
+				VersionUtils.printVersion();
 			}
 
 			if (line.hasOption("create")) {
@@ -102,23 +99,9 @@ public class Cli {
 
 	}
 
-	private static void printVersion() throws IOException {
-		Properties properties = new Properties();
-		InputStream is = new Cli().getClass().getResourceAsStream("/version.properties");
-		properties.load(is);
-		System.out.println(properties.getProperty("version"));
-	}
-
 	private static void create(String className, String domain, String subdomain, String desc) throws IOException {
 		SolutionBuilder builder = new SolutionBuilder();
 		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
-	}
-
-	private static List<String> unsolved(String domain, String subdomain) {
-		ChromeExecutor.openBrowser(domain, subdomain);
-		String pageContent = RobotHelper.getPageContent();
-		String p = UNSOLVED_CHALLENGE_PATTERN;
-		return StringUtils.findAllMultiline(p, pageContent);
 	}
 
 	private static Options createOptions() {
@@ -126,16 +109,13 @@ public class Cli {
 		Option version = new Option("v", "version", false, "print the version information and exit");
 		Option quiet = new Option("q", "quiet", false, "be extra quiet");
 		Option verbose = new Option("d", "debug", false, "be extra verbose");
-
 		Option run = Option.builder("r").longOpt("run").desc("run mvn test").build();
-
 		Option create = Option.builder("c").longOpt("create").numberOfArgs(3)
 				.argName("domain,subdomain,class,description").valueSeparator(',').hasArgs()
 				.desc("create solution from template").build();
 		Option list = Option.builder("l").longOpt("list").desc("list available domains |- subdomains (slug)").build();
 		Option uns = Option.builder("u").longOpt("unsolved").numberOfArgs(2).argName("domain,subdomain")
 				.valueSeparator(',').hasArgs().desc("list yet unsolved challenges").build();
-
 		Option gen = Option.builder("g").longOpt("generate-all").numberOfArgs(2).argName("domain,subdomain")
 				.valueSeparator(',').hasArgs().desc("generate template for all unsolved challenges").build();
 

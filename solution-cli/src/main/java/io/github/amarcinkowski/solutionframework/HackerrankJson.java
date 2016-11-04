@@ -1,9 +1,15 @@
 package io.github.amarcinkowski.solutionframework;
 
+import java.util.List;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import io.github.amarcinkowski.solutionframework.browser.ChromeExecutor;
+import io.github.amarcinkowski.solutionframework.browser.RobotHelper;
+import io.github.amarcinkowski.utils.StringUtils;
 
 public class HackerrankJson {
 
@@ -52,5 +58,14 @@ public class HackerrankJson {
 		}
 		return sb.toString();
 	}
+
+	static List<String> unsolved(String domain, String subdomain) {
+		ChromeExecutor.openBrowser(domain, subdomain);
+		String pageContent = RobotHelper.getPageContent();
+		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
+		return StringUtils.findAllMultiline(p, pageContent);
+	}
+
+	static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
 
 }
