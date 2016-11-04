@@ -14,3 +14,10 @@ my hackerrank solutions framework
  -u,--unsolved <domain,subdomain>                   list yet unsolved challenges
  -v,--version                                       print the version information and exit
 ```
+## Build
+
+Multi-module maven project
+
+# License
+
+Licensed under [MIT License](https://opensource.org/licenses/MIT)
