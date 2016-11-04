@@ -2,9 +2,11 @@ package io.github.amarcinkowski.hackerrank;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,9 +54,6 @@ public class Cli {
 
 		Options options = createOptions();
 
-		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("jt", options);
-
 		// create the parser
 		CommandLineParser parser = new DefaultParser();
 		try {
@@ -97,6 +96,13 @@ public class Cli {
 				HackerrankPageReader.list();
 			}
 
+			if (line.hasOption("version")) {
+				InputStream is = new Cli().getClass().getResourceAsStream("/version.properties");
+				Properties properties = new Properties();
+				properties.load(is);
+				System.out.println(properties.getProperty("version"));
+			}
+
 			if (line.hasOption("create")) {
 				String[] values = line.getOptionValues("c");
 				String domain = values[0];
@@ -106,12 +112,17 @@ public class Cli {
 				create(className, domain, subdomain, desc);
 			}
 
+			if (line.hasOption("help") || line.getOptions().length == 0) {
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp("run.sh", options);
+			}
+
 		} catch (ParseException exp) {
 			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
 		}
 
 	}
-	
+
 	private static void create(String className, String domain, String subdomain, String desc) throws IOException {
 		SolutionBuilder builder = new SolutionBuilder();
 		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
