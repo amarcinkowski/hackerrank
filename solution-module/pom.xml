@@ -8,8 +8,8 @@
 		<artifactId>hackerrank</artifactId>
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>solution-module</artifactId>
-	<name>solution-module</name>
+	<artifactId>hackerrank-solutions</artifactId>
+	<name>hackerrank-solutions</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
