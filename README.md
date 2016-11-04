@@ -1,6 +1,10 @@
 # solutions framework [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
 
-Easy usage of IDE (eclipse & IDEA) tools in solving ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank & ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png)  challenges.
+Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
+
+## Supported platforms
+### ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank
+### ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png) Codility
 
 ### run.sh
 
