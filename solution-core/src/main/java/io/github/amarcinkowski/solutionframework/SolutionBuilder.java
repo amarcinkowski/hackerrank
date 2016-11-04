@@ -13,10 +13,11 @@ import io.github.amarcinkowski.utils.TemplateUtils;
 public class SolutionBuilder {
 
 	private static final String CANONICAL_FORMAT_STRING = "%s.%s";
-	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.hackerrank.%s";
+	private static final String PACKAGE_FORMAT_STRING = "io.github.amarcinkowski.%s.%s";
 	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
 	private static final String CLASS_END = "\n}\n";
 
+	private String platform;
 	private String className;
 	private String packageName;
 	private String domainName;
@@ -46,6 +47,7 @@ public class SolutionBuilder {
 	}
 
 	public Solution build() throws IOException {
+		this.packageName = String.format(PACKAGE_FORMAT_STRING, platform, groupName);
 		File classFile = SolutionUtils.getJavaFile(getCanonical());
 		create(classFile);
 		copyTemplate(classFile);
@@ -59,6 +61,10 @@ public class SolutionBuilder {
 		return this;
 	}
 
+	public SolutionBuilder platform(String platform) {
+		this.platform = platform;
+		return this;
+	}
 	private void copyTemplate(File classFile) throws IOException {
 		if (fromTemplate) {
 			String template = TemplateUtils.getRenderedTemplate(className, packageName);
@@ -111,7 +117,6 @@ public class SolutionBuilder {
 
 	public SolutionBuilder subdomain(String group) {
 		this.groupName = group;
-		this.packageName = String.format(PACKAGE_FORMAT_STRING, group);
 		return this;
 	}
 
