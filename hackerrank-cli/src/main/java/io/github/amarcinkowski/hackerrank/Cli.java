@@ -1,14 +1,9 @@
 package io.github.amarcinkowski.hackerrank;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -20,11 +15,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.log4j.Level;
-import org.apache.maven.shared.invoker.DefaultInvocationRequest;
-import org.apache.maven.shared.invoker.DefaultInvoker;
-import org.apache.maven.shared.invoker.InvocationRequest;
-import org.apache.maven.shared.invoker.InvocationResult;
-import org.apache.maven.shared.invoker.Invoker;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,22 +23,13 @@ import io.github.amarcinkowski.hackerrank.browser.ChromeExecutor;
 import io.github.amarcinkowski.hackerrank.browser.HackerrankPageReader;
 import io.github.amarcinkowski.hackerrank.browser.RobotHelper;
 import io.github.amarcinkowski.utils.LoggingUtils;
+import io.github.amarcinkowski.utils.MavenUtils;
 import io.github.amarcinkowski.utils.StringUtils;
 
 public class Cli {
 
-	public static final String JSON_PATTERN = "HR.PREFETCH_DATA =(.*);[ \n]+HR.MANIFEST_HASH";
 	private static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
 	final Logger logger = LoggerFactory.getLogger(Cli.class);
-
-	public static List<String> findAllMultiline(String pattern, String content) {
-		List<String> list = new ArrayList<>();
-		Matcher m = Pattern.compile(pattern, Pattern.DOTALL).matcher(content);
-		while (m.find()) {
-			list.add(m.group(1));
-		}
-		return list;
-	}
 
 	public static void main(String[] args) throws IOException, MavenInvocationException, XPathExpressionException {
 
@@ -70,7 +51,7 @@ public class Cli {
 
 			if (line.hasOption("run")) {
 				try {
-					mavenInvoke();
+					MavenUtils.mavenInvoke();
 				} catch (Exception e) {
 					System.out.println("try running command: mvn test");
 				}
@@ -97,10 +78,7 @@ public class Cli {
 			}
 
 			if (line.hasOption("version")) {
-				InputStream is = new Cli().getClass().getResourceAsStream("/version.properties");
-				Properties properties = new Properties();
-				properties.load(is);
-				System.out.println(properties.getProperty("version"));
+				printVersion();
 			}
 
 			if (line.hasOption("create")) {
@@ -123,6 +101,13 @@ public class Cli {
 
 	}
 
+	private static void printVersion() throws IOException {
+		Properties properties = new Properties();
+		InputStream is = new Cli().getClass().getResourceAsStream("/version.properties");
+		properties.load(is);
+		System.out.println(properties.getProperty("version"));
+	}
+
 	private static void create(String className, String domain, String subdomain, String desc) throws IOException {
 		SolutionBuilder builder = new SolutionBuilder();
 		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
@@ -132,20 +117,7 @@ public class Cli {
 		ChromeExecutor.openBrowser(domain, subdomain);
 		String pageContent = RobotHelper.getPageContent();
 		String p = UNSOLVED_CHALLENGE_PATTERN;
-		return findAllMultiline(p, pageContent);
-	}
-
-	private static void mavenInvoke() throws MavenInvocationException {
-		InvocationRequest request = new DefaultInvocationRequest();
-		request.setPomFile(new File("pom.xml"));
-		request.setGoals(Collections.singletonList("test"));
-
-		Invoker invoker = new DefaultInvoker();
-		System.setProperty("maven.home", "/usr/share/maven");
-		InvocationResult ir = invoker.execute(request);
-		if (ir.getExitCode() != 0) {
-			System.err.println("mvn failed");
-		}
+		return StringUtils.findAllMultiline(p, pageContent);
 	}
 
 	private static Options createOptions() {

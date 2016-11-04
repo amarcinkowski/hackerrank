@@ -7,6 +7,9 @@ import com.google.gson.JsonParser;
 
 public class HackerrankJson {
 
+	private static final String NEWLINE = "\n";
+	private static final String CATEGORIES = "categories";
+	private static final String CONTEST = "contest";
 	private static final String CHILDREN = "children";
 	private static final String SLUG = "slug";
 	private static final String NAME = "name";
@@ -15,7 +18,7 @@ public class HackerrankJson {
 	private static JsonArray getCategories(String json) {
 		JsonParser jp = new JsonParser();
 		JsonElement je = jp.parse(json);
-		return je.getAsJsonObject().get("contest").getAsJsonObject().get("categories").getAsJsonArray();
+		return je.getAsJsonObject().get(CONTEST).getAsJsonObject().get(CATEGORIES).getAsJsonArray();
 	}
 
 	public static String hackerrankJsonToList(String json) {
@@ -43,7 +46,7 @@ public class HackerrankJson {
 			JsonObject obj = element.getAsJsonObject();
 			String slug = get(obj, SLUG);
 			sb.append(get(obj, NAME));
-			sb.append("\n");
+			sb.append(NEWLINE);
 			JsonArray children = obj.get(CHILDREN).getAsJsonArray();
 			sb.append(parseChildren(children, slug));
 		}
