@@ -2,14 +2,18 @@
 
 Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 
-## Supported platforms
-### ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank
-### ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png) Codility
+## Platform support
+
+| feature | ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank | ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png) |
+|---|---|---|
+| list | :heavy_check_mark: | - |
+| create | :heavy_check_mark: | :heavy_check_mark: |
+| generate-all | :heavy_check_mark: | - |
 
 ### run.sh
 
 ```
- -c,--create <domain,subdomain,class,description>   create solution from  template
+ -c,--create <domain,subdomain,class,description>   create solution from template
  -d,--debug                                         be extra verbose
  -g,--generate-all <domain,subdomain>               generate template for all unsolved challenges
  -h,--help                                          print this message
