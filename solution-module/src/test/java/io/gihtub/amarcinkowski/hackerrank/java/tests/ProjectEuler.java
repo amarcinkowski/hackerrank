@@ -8,13 +8,13 @@ import io.github.amarcinkowski.solutionframework.TestInfo;
 public class ProjectEuler extends SolutionTestSuite {
 
 	@Test
-	@TestInfo(platform = "hackerrank", domain = "java", group = "projecteuler", solutionClass = "MultiplesOf3and5", taskDescription = "Project Euler #1: Multiples of 3 and 5", done = true)
+	@TestInfo(platform = "hackerrank", domain = "java", group = "projecteuler", solutionClass = "MultiplesOf3and5", taskDescription = "Project Euler #1: Multiples of 3 and 5")
 	public void euler1() {
 		runTest();
 	}
 	
 	@Test
-	@TestInfo(platform = "hackerrank", domain = "java", group = "projecteuler", solutionClass = "SumSquareDifference", taskDescription = "Project Euler #6: Sum square difference", done = true)
+	@TestInfo(platform = "hackerrank", domain = "java", group = "projecteuler", solutionClass = "SumSquareDifference", taskDescription = "Project Euler #6: Sum square difference")
 	public void euler6() {
 		runTest();
 	}

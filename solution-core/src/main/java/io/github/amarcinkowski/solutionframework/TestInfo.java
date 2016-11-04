@@ -19,6 +19,4 @@ public @interface TestInfo {
 
 	String group();
 
-	boolean done() default false;
-
 }
