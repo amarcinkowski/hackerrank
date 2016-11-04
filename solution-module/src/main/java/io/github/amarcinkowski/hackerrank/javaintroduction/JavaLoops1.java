@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.hackerrank.intro;
+package io.github.amarcinkowski.hackerrank.javaintroduction;
 
 import java.util.Scanner;
 import io.github.amarcinkowski.solutionframework.Solution;

@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.hackerrank.intro;
+package io.github.amarcinkowski.hackerrank.javaintroduction;
 
 import java.util.Locale;
 import java.util.Scanner;
