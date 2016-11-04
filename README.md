@@ -1,4 +1,4 @@
-# [codility](https://amarcinkowski.github.io/codility_color_230x67_original.svg) solutions framework [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
+# [codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility_color_230x67_original.svg) solutions framework [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
 
 Easy usage of IDE (eclipse & IDEA) tools in solving HackerRank & Codility challenges.
 
