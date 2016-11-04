@@ -60,7 +60,7 @@ public class SolutionTestSuite {
 	private void printNumOfDiffs() {
 		try {
 			if (getNumOfDiffs() == 0) {
-				logger.info(current + ": OK!");
+				logger.info(String.format("\t \\e[42mOK!\\e[0m (%s)", current.getName()));
 				Assert.assertTrue(true);
 			} else {
 				logger.warn("Expected and Result differs");
@@ -116,7 +116,7 @@ public class SolutionTestSuite {
 
 	public void runTest() {
 		if (current != null) {
-			logger.info("Test: " + current.toString());
+			logger.trace("Test: " + current.toString());
 			current.execute();
 			logger.trace("Test done");
 		}
