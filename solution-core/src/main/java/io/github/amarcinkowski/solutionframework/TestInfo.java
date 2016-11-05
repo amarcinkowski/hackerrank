@@ -17,6 +17,7 @@ public @interface TestInfo {
 
 	String domain() default "";
 
+	// TODO rename to subdomain
 	String group();
 
 }
