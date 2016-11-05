@@ -82,6 +82,10 @@ public class Solution implements Command {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getPlatform() {
+		return platform;
+	}
 
 	public File java() {
 		String path = String.format(SOLUTION_FILE, platform, platform, StringUtils.packagify(subdomain), className);

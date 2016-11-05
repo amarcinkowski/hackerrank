@@ -34,8 +34,8 @@ public class SolutionBuilder {
 	private void appendMethodToTestSuite(Solution solution) throws IOException {
 		File file = solution.suite();
 		String truncated = FileUtils.truncateFile(file.getAbsolutePath(), CLASS_ENDING_PATTERN);
-		String method = TemplateUtils.getRenderedTemplate(solution.getDomain(), solution.getSubdomain(),
-				solution.getClassName(), solution.getDescription());
+		String method = TemplateUtils.getRenderedTemplate(solution.getPlatform(), solution.getDomain(),
+				solution.getSubdomain(), solution.getClassName(), solution.getDescription());
 		String contents = new StringBuilder().append(truncated).append(method).append(CLASS_END).toString();
 		Files.write(Paths.get(file.getAbsolutePath()), contents.getBytes());
 	}

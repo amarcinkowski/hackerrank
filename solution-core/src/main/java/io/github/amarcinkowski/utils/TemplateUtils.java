@@ -9,6 +9,8 @@ import org.jtwig.JtwigTemplate;
 
 public class TemplateUtils {
 
+	// TODO public -?> privatre
+	public static final String PLATFORM = "PLATFORM";
 	public static final String METHOD = "METHOD";
 	public static final String DESCRIPTION = "DESCRIPTION";
 	public static final String CLASS = "CLASS";
@@ -29,10 +31,10 @@ public class TemplateUtils {
 		return getTemplate(SOLUTION_TWIG_TEMPLATE).render(model);
 	}
 
-	public static String getRenderedTemplate(String domainName, String groupName, String className,
+	public static String getRenderedTemplate(String platform, String domainName, String groupName, String className,
 			String taskDescription) throws IOException {
 		JtwigModel model = JtwigModel.newModel().with(DOMAIN, domainName).with(GROUP, groupName)
-				.with(DESCRIPTION, taskDescription).with(CLASS, className)
+				.with(PLATFORM, platform).with(DESCRIPTION, taskDescription).with(CLASS, className)
 				.with(METHOD, StringUtils.uncapitalize(className));
 		return getTemplate(TEST_TWIG_TEMPLATE).render(model);
 	}
