@@ -5,4 +5,4 @@ cache:
   directories:
   - $HOME/.m2
 script: ./run.sh test -p hackerrank 
-after_script: rm -rf $HOME/.m2/repository/io/github/amarcinkowski 
+before_cache: rm -rf $HOME/.m2/repository/io/github/amarcinkowski 
