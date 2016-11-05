@@ -35,13 +35,14 @@ public class Cli {
 	private boolean help;
 
 	private static CreateCommand cc = new CreateCommand();
+	private static RunCommand rc = new RunCommand();
 
 	public static void main(String... args) throws IOException, MavenInvocationException, XPathExpressionException {
 
 		Cli cli = new Cli();
 		JCommander jc = new JCommander(cli);
 		jc.setProgramName("sf");
-		jc.addCommand("run", new RunCommand());
+		jc.addCommand("run", rc);
 		jc.addCommand("create", cc);
 		if (cli.help || args.length == 0) {
 			jc.usage();
@@ -52,11 +53,11 @@ public class Cli {
 			jc.parse(args);
 			switch (jc.getParsedCommand()) {
 			case "run":
-				MavenUtils.mavenInvoke();
+				MavenUtils.mavenInvoke(rc.platform);
 				break;
 			case "create":
-				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain).platform(cc.platform)
-						.description(cc.description)./*createAll().*/build();
+				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain)
+						.platform(cc.platform).description(cc.description).build();
 				break;
 
 			default:
