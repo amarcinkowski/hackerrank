@@ -14,15 +14,13 @@ import io.github.amarcinkowski.utils.TemplateUtils;
 
 public class SolutionBuilder {
 
-	// private static final String CANONICAL_FORMAT_STRING = "%s.%s";
 	private final static Logger logger = LoggerFactory.getLogger(SolutionBuilder.class);
 
 	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
 	private static final String CLASS_END = "\n}\n";
 
 	private String platform;
-	// TODO rename to classname
-	private String className;
+	private String classname;
 	private String domain;
 	private String subdomain;
 	private String description;
@@ -54,7 +52,7 @@ public class SolutionBuilder {
 		logger.trace("Build new Solution and create files");
 		Solution solution = new Solution();
 		solution.setPlatform(platform);
-		solution.setClassName(className);
+		solution.setClassName(classname);
 		solution.setDomain(domain);
 		solution.setSubdomain(subdomain);
 		solution.setDescription(description);
@@ -63,7 +61,7 @@ public class SolutionBuilder {
 	}
 
 	public SolutionBuilder className(String className) {
-		this.className = className;
+		this.classname = className;
 		return this;
 	}
 

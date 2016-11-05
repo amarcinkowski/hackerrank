@@ -10,6 +10,8 @@ import io.github.amarcinkowski.utils.StringUtils;
 
 public class Solution implements Command {
 
+	private static final String PACKAGE = "io.github.amarcinkowski.%s.%s";
+
 	private final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
 	private static final String SOLUTION_FILE = "%s/%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
@@ -67,7 +69,7 @@ public class Solution implements Command {
 	}
 
 	public String getPackage() {
-		return String.format("io.github.amarcinkowski.%s.%s", platform, StringUtils.packagify(subdomain));
+		return String.format(PACKAGE, platform, StringUtils.packagify(subdomain));
 	}
 
 	public String getDomain() {
