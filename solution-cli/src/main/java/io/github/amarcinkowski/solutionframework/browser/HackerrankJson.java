@@ -58,7 +58,7 @@ public class HackerrankJson {
 		return sb.toString();
 	}
 
-	static List<String> unsolved(String domain, String subdomain) {
+	public static List<String> unsolved(String domain, String subdomain) {
 		ChromeExecutor.openBrowser(PageReader.HACKERRANK_URL);
 		String pageContent = RobotHelper.getPageContent();
 		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
