@@ -53,7 +53,7 @@ public class FileUtils {
 
 	public static void createFileIfNotExisting(File f) throws IOException {
 		if (!f.exists()) {
-			logger.debug(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
+			logger.trace(String.format("Missing %s file. Creating empty.", f.getAbsolutePath()));
 			try {
 				Path path = Paths.get(f.getAbsolutePath());
 				Files.createDirectories(path.getParent());
@@ -62,22 +62,9 @@ public class FileUtils {
 				logger.debug(String.format("Cannot create: ", f.getAbsolutePath()));
 			}
 		} else if (f.length() == 0) {
-			logger.error(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
-			System.exit(0);
+			logger.warn(String.format("Empty %s. Aborting.", f.getAbsolutePath()));
 		}
 	}
-
-/*	public static File getInResourceFile(String solutionClass) {
-		return new File(SolutionUtils.getTestResourcePath(solutionClass) + IN_DATA_EXTENSION);
-	}
-
-	public static File getResultResourceFile(String solutionClass) {
-		return new File(SolutionUtils.getTestResourcePath(solutionClass) + RESULT_EXTENSION);
-	}
-
-	public static File getExpectedResourceFile(String solutionClass) {
-		return new File(SolutionUtils.getTestResourcePath(solutionClass) + EXPECTED_EXTENSION);
-	}*/
 
 	public static String truncateFile(String filepath, String pattern) throws IOException {
 		try (Stream<String> lines = SolutionBuilder.fileToStream(filepath)) {
