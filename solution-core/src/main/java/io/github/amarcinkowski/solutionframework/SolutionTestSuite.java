@@ -59,10 +59,10 @@ public class SolutionTestSuite {
 	private void printNumOfDiffs() {
 		try {
 			if (getNumOfDiffs() == 0) {
-				logger.info(String.format(" |\tOK! (%s)", current.getClassName()));
+				logger.info(String.format(" |= OK! (%s)", current.getClassName()));
 				Assert.assertTrue(true);
 			} else {
-				logger.warn("Expected and Result differs");
+				logger.warn(" |= Expected and Result differs");
 				Assert.fail();
 			}
 		} catch (IOException e) {

@@ -17,7 +17,7 @@ public class MultiplesOf3and5 extends Solution {
 	Scanner scanner;
 
 	private long closestLowerMultiple(int n, int k) {
-		sb.append("\n Biggest multiple of " + k + " under " + n);
+		sb.append(" Biggest multiple of " + k + " under " + n);
 		do {
 			n--;
 		} while (n % k != 0);

@@ -18,7 +18,8 @@ public class SolutionTestSettings implements TestRule {
 			public void evaluate() throws Throwable {
 				className = description.getClassName();
 				methodName = description.getMethodName();
-				String str = String.format("%20s [%s]", methodName, className.substring(className.lastIndexOf(".") + 1));
+				String str = String.format(" = %-20s [%s]", methodName, className.substring(className.lastIndexOf(".") + 1));
+				logger.debug(".");
 				logger.debug(str);
 				base.evaluate();
 			}

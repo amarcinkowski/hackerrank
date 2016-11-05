@@ -42,9 +42,7 @@ public class Solution implements Command {
 	}
 
 	protected static void log(Object log) {
-		if (System.getenv("LOGNAME").equals("amarcinkowski")) {
-			logger.debug(log.toString());
-		}
+		logger.debug(" | out> " + log.toString());
 	}
 
 	public void execute() {
@@ -96,9 +94,11 @@ public class Solution implements Command {
 		return new File(path);
 	}
 
-	@Override
-	public String toString() {
-		return String.format("%s,%s,%s,%s,%s", className, platform, domain, subdomain, description);
-	}
+	// TODO rm
+	// @Override
+	// public String toString() {
+	// return String.format("%s,%s,%s,%s,%s", className, platform, domain,
+	// subdomain, description);
+	// }
 
 }
