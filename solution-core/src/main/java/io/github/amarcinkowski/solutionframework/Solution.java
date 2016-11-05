@@ -17,17 +17,15 @@ public class Solution implements Command {
 	private static final String IO_DATA_FILE = "%s/%s-solutions/src/test/resources/%s/%s.%s";
 	private static final String BASE_DIR = new File("..").getAbsolutePath();
 
-	// private final String name;
 	private String platform;
-	// TODO rename to classname
-	private String className;
+	private String classname;
 	private String domain;
 	private String subdomain;
 	private String description;
 
 	public Solution(TestInfo ti) {
 		this.platform = ti.platform();
-		this.className = ti.solutionClass();
+		this.classname = ti.solutionClass();
 		this.domain = ti.domain();
 		this.subdomain = ti.group();
 		this.description = ti.taskDescription();
@@ -49,7 +47,7 @@ public class Solution implements Command {
 	}
 
 	public void setClassName(String className) {
-		this.className = className;
+		this.classname = className;
 	}
 
 	public void setDomain(String domain) {
@@ -65,7 +63,7 @@ public class Solution implements Command {
 	}
 
 	public String getClassName() {
-		return className;
+		return classname;
 	}
 
 	public String getPackage() {
@@ -89,33 +87,33 @@ public class Solution implements Command {
 	}
 
 	public File java() {
-		String path = String.format(SOLUTION_FILE, BASE_DIR, platform, platform, StringUtils.packagify(subdomain),
-				className);
+		String subP = StringUtils.packagify(subdomain);
+		String path = String.format(SOLUTION_FILE, BASE_DIR, platform, platform, subP, classname);
 		return new File(path);
 	}
 
 	public File suite() {
-		String path = String.format(SUITE_FILE, BASE_DIR, platform, platform, StringUtils.packagify(domain),
-				StringUtils.camelify(subdomain));
+		String domP = StringUtils.packagify(domain);
+		String subC = StringUtils.camelify(subdomain);
+		String path = String.format(SUITE_FILE, BASE_DIR, platform, platform, domP, subC);
 		return new File(path);
 	}
 
 	public File in() {
-		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
-				"in");
+		String subP = StringUtils.packagify(subdomain);
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, subP, classname, "in");
 		return new File(path);
 	}
 
 	public File out() {
-		// TODO rename files result->out
-		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
-				"result");
+		String subP = StringUtils.packagify(subdomain);
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, subP, classname, "out");
 		return new File(path);
 	}
 
 	public File expected() {
-		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
-				"expected");
+		String subP = StringUtils.packagify(subdomain);
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, subP, classname, "expected");
 		return new File(path);
 	}
 
