@@ -1,4 +1,4 @@
-package io.gihtub.amarcinkowski.hackerrank.java.tests;
+package io.github.amarcinkowski.hackerrank.java.tests;
 
 import org.junit.Test;
 
