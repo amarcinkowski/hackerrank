@@ -3,10 +3,11 @@ package io.github.amarcinkowski.hackerrank.projecteuler;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class MultiplesOf3and5 extends Solution {
-	public MultiplesOf3and5(String name) {
-		super(name);
+	public MultiplesOf3and5(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

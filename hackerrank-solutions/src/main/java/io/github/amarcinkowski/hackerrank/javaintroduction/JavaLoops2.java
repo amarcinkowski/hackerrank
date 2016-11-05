@@ -3,11 +3,12 @@ package io.github.amarcinkowski.hackerrank.javaintroduction;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class JavaLoops2 extends Solution {
 
-	public JavaLoops2(String name) {
-		super(name);
+	public JavaLoops2(TestInfo ti) {
+		super(ti);
 	}
 
     protected static void log(String log) {}

@@ -3,10 +3,11 @@ package io.github.amarcinkowski.hackerrank.javaadvanced;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class JavaFactory extends Solution {
-	public JavaFactory(String name) {
-		super(name);
+	public JavaFactory(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

@@ -3,11 +3,12 @@ package io.github.amarcinkowski.hackerrank.javaintroduction;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class JavaDatatypes extends Solution {
 
-	public JavaDatatypes(String name) {
-		super(name);
+	public JavaDatatypes(TestInfo ti) {
+		super(ti);
 	}
 	/* 
 	 * COPY FROM LINE BELOW:

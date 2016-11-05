@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class ReflectionAttributes extends Solution {
-	public ReflectionAttributes(String name) {
-		super(name);
+	public ReflectionAttributes(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

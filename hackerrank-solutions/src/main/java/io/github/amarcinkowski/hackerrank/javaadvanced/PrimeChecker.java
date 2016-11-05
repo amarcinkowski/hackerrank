@@ -9,10 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class PrimeChecker extends Solution {
-	public PrimeChecker(String name) {
-		super(name);
+	public PrimeChecker(TestInfo ti) {
+		super(ti);
 	} /*
 		 * private void log(String msg) {} /*
 		 */

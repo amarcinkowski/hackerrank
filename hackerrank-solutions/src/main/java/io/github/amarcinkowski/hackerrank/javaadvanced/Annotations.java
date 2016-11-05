@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 
 @Target(ElementType.METHOD)
@@ -35,8 +36,8 @@ class FamilyMember {
 
 
 public class Annotations extends Solution {
-	public Annotations(String name) {
-		super(name);
+	public Annotations(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

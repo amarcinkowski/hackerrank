@@ -4,11 +4,12 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class StdinStdout2 extends Solution {
 
-	public StdinStdout2(String name) {
-		super(name);
+	public StdinStdout2(TestInfo ti) {
+		super(ti);
 	}
 
 	Scanner scanner;

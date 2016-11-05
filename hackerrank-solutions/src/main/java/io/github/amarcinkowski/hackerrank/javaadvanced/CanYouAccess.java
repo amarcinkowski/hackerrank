@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class CanYouAccess extends Solution {
-	public CanYouAccess(String name) {
-		super(name);
+	public CanYouAccess(TestInfo ti) {
+		super(ti);
 	} /*
 		 * COPY FROM LINE BELOW:
 		 * 

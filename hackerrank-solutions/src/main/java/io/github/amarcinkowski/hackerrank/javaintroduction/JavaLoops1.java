@@ -2,9 +2,10 @@ package io.github.amarcinkowski.hackerrank.javaintroduction;
 
 import java.util.Scanner;
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class JavaLoops1 extends Solution {
-public JavaLoops1(String name) {super(name);}	/*
+public JavaLoops1(TestInfo ti) {super(ti);}	/*
 * overloaded log:
 
 	private static void log(String msg) {}

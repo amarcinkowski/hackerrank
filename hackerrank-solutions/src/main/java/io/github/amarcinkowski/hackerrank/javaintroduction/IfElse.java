@@ -3,11 +3,12 @@ package io.github.amarcinkowski.hackerrank.javaintroduction;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class IfElse extends Solution {
 
-	public IfElse(String name) {
-		super(name);
+	public IfElse(TestInfo ti) {
+		super(ti);
 	}
 	
 	Scanner scanner;

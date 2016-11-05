@@ -3,10 +3,11 @@ package io.github.amarcinkowski.hackerrank.javaintroduction;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class EndOfFile extends Solution {
-	public EndOfFile(String name) {
-		super(name);
+	public EndOfFile(TestInfo ti) {
+		super(ti);
 	} /*
 		 * COPY FROM LINE BELOW:
 		 * 

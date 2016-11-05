@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 interface PerformOperation {
 	boolean check(int a);
@@ -53,8 +54,8 @@ class Math {
 }
 
 public class LambdaExpressions extends Solution {
-	public LambdaExpressions(String name) {
-		super(name);
+	public LambdaExpressions(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

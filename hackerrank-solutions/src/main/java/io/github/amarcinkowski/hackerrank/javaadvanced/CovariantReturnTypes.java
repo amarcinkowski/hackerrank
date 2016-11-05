@@ -3,6 +3,7 @@ package io.github.amarcinkowski.hackerrank.javaadvanced;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 
 class Flower {
@@ -60,8 +61,8 @@ class AndhraPradesh extends State {
 }
 
 public class CovariantReturnTypes extends Solution { // hr (not public, no constructor): class CovariantReturnTypes 
-	public CovariantReturnTypes(String name) {
-		super(name);
+	public CovariantReturnTypes(TestInfo ti) {
+		super(ti);
 	} /*
 		 * overloaded log:
 		 * 

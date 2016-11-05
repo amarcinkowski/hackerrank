@@ -3,9 +3,10 @@ package io.github.amarcinkowski.hackerrank.javaadvanced;
 import java.util.Scanner;
 
 import io.github.amarcinkowski.solutionframework.Solution;
+import io.github.amarcinkowski.solutionframework.TestInfo;
 
 public class Singleton extends Solution {
-public Singleton(String name) {super(name);}	/*
+public Singleton(TestInfo ti) {super(ti);}	/*
 * overloaded log:
 
 	private void log(String msg) {}
