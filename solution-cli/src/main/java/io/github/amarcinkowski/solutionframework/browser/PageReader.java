@@ -2,7 +2,7 @@ package io.github.amarcinkowski.solutionframework.browser;
 
 import java.util.stream.Collectors;
 
-import io.github.amarcinkowski.utils.StringUtils;
+import io.github.amarcinkowski.utils.SearchUtils;
 
 public class PageReader {
 
@@ -11,7 +11,7 @@ public class PageReader {
 	public static final String CODILITY_URL = "https://codility.com/programmers/lessons/1-iterations/";
 
 	public static void printList(String source) {
-		String json = StringUtils.findAllMultiline(JSON_PATTERN, source).stream().collect(Collectors.joining());
+		String json = SearchUtils.findAllMultiline(JSON_PATTERN, source).stream().collect(Collectors.joining());
 		System.out.println(HackerrankJson.hackerrankJsonToList(json));
 	}
 

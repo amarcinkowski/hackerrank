@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import io.github.amarcinkowski.utils.StringUtils;
+import io.github.amarcinkowski.utils.SearchUtils;
 
 public class HackerrankJson {
 
@@ -18,6 +18,7 @@ public class HackerrankJson {
 	private static final String SLUG = "slug";
 	private static final String NAME = "name";
 	private static final String FORMAT = " |- %-34s <%s,%s>\n";
+	private static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
 
 	private static JsonArray getCategories(String json) {
 		JsonParser jp = new JsonParser();
@@ -61,9 +62,8 @@ public class HackerrankJson {
 		ChromeExecutor.openBrowser(PageReader.HACKERRANK_URL);
 		String pageContent = RobotHelper.getPageContent();
 		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
-		return StringUtils.findAllMultiline(p, pageContent);
+		return SearchUtils.findAllMultiline(p, pageContent);
 	}
 
-	static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
 
 }
