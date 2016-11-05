@@ -1,4 +1,4 @@
-# solutions framework [![Build Status](https://travis-ci.org/amarcinkowski/hackerrank.svg?branch=master)](https://travis-ci.org/amarcinkowski/hackerrank)
+# solutions framework [![Build Status](https://travis-ci.org/amarcinkowski/solutions-framework.svg?branch=master)](https://travis-ci.org/amarcinkowski/solutions-framework)
 
 Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 
