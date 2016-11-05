@@ -69,6 +69,8 @@ Usage: run.sh [options] [command] [command options]
 - Tech stack: java 8 / maven
 - Tools: git flow
 
+*solution-framework* is *TDD* compatibile - it creates *red* tests, you'll have to go *green* yourself.
+
 # License
 
 Licensed under [MIT License](https://opensource.org/licenses/MIT)
