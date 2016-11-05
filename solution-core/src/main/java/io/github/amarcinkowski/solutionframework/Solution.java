@@ -17,7 +17,7 @@ public class Solution implements Command {
 	private static final String SOLUTION_FILE = "%s/%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
 	private static final String SUITE_FILE = "%s/%s-solutions/src/test/java/io/github/amarcinkowski/%s/%s/tests/%s.java";
 	private static final String IO_DATA_FILE = "%s/%s-solutions/src/test/resources/%s/%s.%s";
-	private static final String BASE_DIR = new File("..").getAbsolutePath();
+	private static final String BASE_DIR = new File(".").getAbsolutePath();
 
 	private String platform;
 	private String classname;
