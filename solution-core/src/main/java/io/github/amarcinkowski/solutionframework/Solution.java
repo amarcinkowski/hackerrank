@@ -13,6 +13,7 @@ public class Solution implements Command {
 	private final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
 	private static final String SOLUTION_FILE = "%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
+	private static final String SUITE_FILE = "%s-solutions/src/test/java/io/github/amarcinkowski/%s/%s/tests/%s.java";
 	private static final String IO_DATA_FILE = "src/test/resources/%s/%s.%s";
 
 	// private final String name;
@@ -24,8 +25,6 @@ public class Solution implements Command {
 	private String description;
 
 	public Solution(TestInfo ti) {
-		// System.out.println("Solution(name) Constructor");
-		// this.className = name;
 		this.platform = ti.platform();
 		this.className = ti.solutionClass();
 		this.domain = ti.domain();
@@ -33,12 +32,7 @@ public class Solution implements Command {
 		this.description = ti.taskDescription();
 	}
 
-	// public String getName() {
-	// return name;
-	// }
-
 	public Solution() {
-		throw new NotImplementedException();
 	}
 
 	protected static void log(Object log) {
@@ -73,8 +67,30 @@ public class Solution implements Command {
 		return className;
 	}
 
+	public String getPackage() {
+		return String.format("io.github.amarcinkowski.%s.%s", platform, StringUtils.packagify(subdomain));
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public String getSubdomain() {
+		return subdomain;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
 	public File java() {
 		String path = String.format(SOLUTION_FILE, platform, platform, StringUtils.packagify(subdomain), className);
+		return new File(path);
+	}
+
+	public File suite() {
+		String path = String.format(SUITE_FILE, platform, platform, StringUtils.packagify(domain),
+				StringUtils.camelify(subdomain));
 		return new File(path);
 	}
 
@@ -93,12 +109,5 @@ public class Solution implements Command {
 		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "expected");
 		return new File(path);
 	}
-
-	// TODO rm
-	// @Override
-	// public String toString() {
-	// return String.format("%s,%s,%s,%s,%s", className, platform, domain,
-	// subdomain, description);
-	// }
 
 }
