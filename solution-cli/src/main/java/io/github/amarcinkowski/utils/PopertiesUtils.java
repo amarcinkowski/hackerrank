@@ -6,13 +6,24 @@ import java.util.Properties;
 
 import io.github.amarcinkowski.solutionframework.Cli;
 
-public class VersionUtils {
+public class PopertiesUtils {
+
+	private static final String VERSION = "version";
+	private static final String VERSION_PROPERTIES = "/version.properties";
+	private static final Properties properties = new Properties();
+
+	private static InputStream getResource() {
+		return new Cli().getClass().getResourceAsStream(VERSION_PROPERTIES);
+	}
+
+	private static Properties getProps() throws IOException {
+		properties.clear();
+		properties.load(getResource());
+		return properties;
+	}
 
 	public static void printVersion() throws IOException {
-		Properties properties = new Properties();
-		InputStream is = new Cli().getClass().getResourceAsStream("/version.properties");
-		properties.load(is);
-		System.out.println(properties.getProperty("version"));
+		System.out.println(getProps().getProperty(VERSION));
 	}
 
 }

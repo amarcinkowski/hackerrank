@@ -15,6 +15,12 @@ import org.apache.maven.shared.invoker.MavenInvocationException;
  */
 public class MavenUtils {
 
+	private static final String LOGNAME = "LOGNAME";
+
+	private static final String TRAVIS = "travis";
+
+	private static final String USR_LOCAL_MAVEN = "/usr/local/maven";
+
 	/** The Constant MVN_LOG_LEVEL. */
 	private static final String MVN_LOG_LEVEL = "-Dorg.slf4j.simpleLogger.defaultLogLevel=warn";
 
@@ -43,14 +49,18 @@ public class MavenUtils {
 	 */
 	public static void mavenInvoke(String platform) throws MavenInvocationException {
 		Invoker invoker = new DefaultInvoker();
-		if (System.getenv("LOGNAME").equals("travis")) {
-			invoker.setMavenHome(new File("/usr/local/maven"));
-		} else {
-			System.setProperty(MAVEN_HOME, USR_SHARE_MAVEN);
-		}
+		setEnv(invoker);
 		InvocationResult ir = invoker.execute(getRequest(platform));
 		if (ir.getExitCode() != 0) {
 			System.err.println(MVN_FAILED);
+		}
+	}
+
+	private static void setEnv(Invoker invoker) {
+		if (System.getenv(LOGNAME).equals(TRAVIS)) {
+			invoker.setMavenHome(new File(USR_LOCAL_MAVEN));
+		} else {
+			System.setProperty(MAVEN_HOME, USR_SHARE_MAVEN);
 		}
 	}
 
