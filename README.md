@@ -23,9 +23,15 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
  -u,--unsolved <domain,subdomain>                   list yet unsolved challenges
  -v,--version                                       print the version information and exit
 ```
-## Build
+## Features
 
-Multi-module maven project
+- Maven multi-module project
+- Libraries
+ - utils:           guava, commons-lang3
+ - cli:             jcommander
+ - template engine: jtwig
+- Tech stack: java 8 / maven
+- Tools: git flow
 
 # License
 
