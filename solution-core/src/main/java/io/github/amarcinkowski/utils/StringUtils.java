@@ -18,6 +18,7 @@ public class StringUtils {
 	}
 	
 	public static String camelify(String string) {
+		string = string.replaceAll(" ", "-").replaceAll(NONASCII, "");
 		return CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_CAMEL, string);
 	}
 

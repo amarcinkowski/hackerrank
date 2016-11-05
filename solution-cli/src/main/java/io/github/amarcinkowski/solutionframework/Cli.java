@@ -87,7 +87,7 @@ public class Cli {
 				break;
 			case "generate":
 				for (String challenge : HackerrankJson.unsolved(gc.domain, gc.subdomain)) {
-					String classname = StringUtils.camelify(StringUtils.normalize(challenge));
+					String classname = StringUtils.camelify(challenge);
 					logger.info(String.format("%s => %s", challenge, classname));
 					new SolutionBuilder().className(classname).subdomain(gc.subdomain).domain(gc.domain)
 							.platform(gc.platform).description(challenge).build();
