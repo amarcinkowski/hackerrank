@@ -10,7 +10,6 @@ import org.apache.maven.shared.invoker.InvocationResult;
 import org.apache.maven.shared.invoker.Invoker;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MavenUtils.
  */
