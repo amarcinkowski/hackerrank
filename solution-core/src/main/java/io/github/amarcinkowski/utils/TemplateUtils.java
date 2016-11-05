@@ -17,8 +17,8 @@ public class TemplateUtils {
 	public static final String PACKAGE = "PACKAGE";
 	public static final String CLASSNAME = "CLASSNAME";
 
-	public static final String SOLUTION_TWIG_TEMPLATE = "hackerrank-core/src/main/resources/solution.twig";
-	public static final String TEST_TWIG_TEMPLATE = "hackerrank-core/src/main/resources/test.twig";
+	public static final String SOLUTION_TWIG_TEMPLATE = "solution-core/src/main/resources/solution.twig";
+	public static final String TEST_TWIG_TEMPLATE = "solution-core/src/main/resources/test.twig";
 
 	private static JtwigTemplate getTemplate(String twigFile) {
 		return JtwigTemplate.fileTemplate(new File(twigFile));
