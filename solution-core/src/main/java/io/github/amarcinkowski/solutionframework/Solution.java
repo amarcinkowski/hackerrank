@@ -12,9 +12,10 @@ public class Solution implements Command {
 
 	private final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
-	private static final String SOLUTION_FILE = "%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
-	private static final String SUITE_FILE = "%s-solutions/src/test/java/io/github/amarcinkowski/%s/%s/tests/%s.java";
-	private static final String IO_DATA_FILE = "src/test/resources/%s/%s.%s";
+	private static final String SOLUTION_FILE = "%s/%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
+	private static final String SUITE_FILE = "%s/%s-solutions/src/test/java/io/github/amarcinkowski/%s/%s/tests/%s.java";
+	private static final String IO_DATA_FILE = "%s/%s-solutions/src/test/resources/%s/%s.%s";
+	private static final String BASE_DIR = new File("..").getAbsolutePath();
 
 	// private final String name;
 	private String platform;
@@ -82,35 +83,39 @@ public class Solution implements Command {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public String getPlatform() {
 		return platform;
 	}
 
 	public File java() {
-		String path = String.format(SOLUTION_FILE, platform, platform, StringUtils.packagify(subdomain), className);
+		String path = String.format(SOLUTION_FILE, BASE_DIR, platform, platform, StringUtils.packagify(subdomain),
+				className);
 		return new File(path);
 	}
 
 	public File suite() {
-		String path = String.format(SUITE_FILE, platform, platform, StringUtils.packagify(domain),
+		String path = String.format(SUITE_FILE, BASE_DIR, platform, platform, StringUtils.packagify(domain),
 				StringUtils.camelify(subdomain));
 		return new File(path);
 	}
 
 	public File in() {
-		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "in");
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
+				"in");
 		return new File(path);
 	}
 
 	public File out() {
 		// TODO rename files result->out
-		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "result");
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
+				"result");
 		return new File(path);
 	}
 
 	public File expected() {
-		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "expected");
+		String path = String.format(IO_DATA_FILE, BASE_DIR, platform, StringUtils.packagify(subdomain), className,
+				"expected");
 		return new File(path);
 	}
 
