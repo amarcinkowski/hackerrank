@@ -2,7 +2,6 @@ package io.github.amarcinkowski.solutionframework.browser;
 
 import java.util.stream.Collectors;
 
-import io.github.amarcinkowski.solutionframework.HackerrankJson;
 import io.github.amarcinkowski.utils.StringUtils;
 
 public class PageReader {

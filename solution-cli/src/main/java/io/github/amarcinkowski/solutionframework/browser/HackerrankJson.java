@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.solutionframework;
+package io.github.amarcinkowski.solutionframework.browser;
 
 import java.util.List;
 
@@ -7,9 +7,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import io.github.amarcinkowski.solutionframework.browser.ChromeExecutor;
-import io.github.amarcinkowski.solutionframework.browser.PageReader;
-import io.github.amarcinkowski.solutionframework.browser.RobotHelper;
 import io.github.amarcinkowski.utils.StringUtils;
 
 public class HackerrankJson {
