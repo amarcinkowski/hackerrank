@@ -8,28 +8,18 @@ import org.apache.maven.shared.invoker.MavenInvocationException;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
 
+import io.github.amarcinkowski.solutionframework.browser.PageReader;
+import io.github.amarcinkowski.solutionframework.command.CreateCommand;
+import io.github.amarcinkowski.solutionframework.command.ListCommand;
+import io.github.amarcinkowski.solutionframework.command.TestCommand;
 import io.github.amarcinkowski.utils.MavenUtils;
 
-@Parameters(commandDescription = "Run all tests", separators = "=")
-class TestCommand {
-	@Parameter(names = { "-p", "--platform" }, description = "platform name e.g. hackerrank, codility", required = true)
-	public String platform;
-}
-
-class CreateCommand extends TestCommand {
-	@Parameter(names = { "-d", "--domain" }, required = true)
-	public String domain;
-	@Parameter(names = { "-s", "--subdomain" }, required = true)
-	public String subdomain;
-	@Parameter(names = { "-c", "--classname" }, required = true)
-	public String classname;
-	@Parameter(names = { "-t", "--description" })
-	public String description;
-}
-
 public class Cli {
+
+	private static final String LIST = "list";
+
+	private static final String RUN_SH = "run.sh";
 
 	private static final String CREATE = "create";
 
@@ -38,18 +28,29 @@ public class Cli {
 	@Parameter(names = { "-h", "--help" }, help = true, description = "this message")
 	private boolean help;
 
+	@Parameter(names = { "-v", "--version" }, description = "version information")
+	private boolean version;
+
 	private static CreateCommand cc = new CreateCommand();
 	private static TestCommand tc = new TestCommand();
+	private static ListCommand lc = new ListCommand();
 
 	public static void main(String... args) throws IOException, MavenInvocationException, XPathExpressionException {
 
 		Cli cli = new Cli();
 		JCommander jc = new JCommander(cli);
-		jc.setProgramName("run.sh");
+		jc.setProgramName(RUN_SH);
 		jc.addCommand(TEST, tc);
 		jc.addCommand(CREATE, cc);
+		jc.addCommand(LIST, lc);
+
 		if (cli.help || args.length == 0) {
 			jc.usage();
+			return;
+		}
+
+		if (cli.version) {
+
 			return;
 		}
 
@@ -62,6 +63,17 @@ public class Cli {
 			case CREATE:
 				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain)
 						.platform(cc.platform).description(cc.description).build();
+			case LIST:
+				switch (lc.platform) {
+				case "hackerrank":
+					String source = PageReader.source(PageReader.HACKERRANK_URL);
+					PageReader.printList(source);
+					break;
+				case "codility":
+					source = PageReader.source(PageReader.CODILITY_URL);
+					System.out.println(source);
+					break;
+				}
 				break;
 
 			default:
@@ -73,46 +85,24 @@ public class Cli {
 
 		/*
 		 * if (line.hasOption("unsolved")) { String[] values =
-		 * line.getOptionValues("u");
+		 * 
 		 * System.out.println(HackerrankJson.unsolved(domain, subdomain)); }
 		 * 
 		 * if (line.hasOption("generate-all")) { String[] values =
 		 * line.getOptionValues("g"); for (String challenge :
 		 * HackerrankJson.unsolved(domain, subdomain)) { String
+		 * 
 		 * challengeNormalized = StringUtils.normalize(challenge); String
 		 * domainNormalized = StringUtils.normalize(domain); String
 		 * subdomainNormalized = StringUtils.normalize(subdomain);
+		 * 
 		 * create(challengeNormalized, domainNormalized, subdomainNormalized,
 		 * domain + subdomain + challenge); } }
 		 * 
-		 * if (line.hasOption("list")) { HackerrankPageReader.list(); }
-		 * 
-		 * if (line.hasOption("version")) { VersionUtils.printVersion(); }
-		 * 
 		 */
 
-		// } catch (ParseException exp) {
-		// System.err.println(exp.getMessage());
-		// System.err.println("for help use: run.sh -h");
-		// HelpFormatter formatter = new HelpFormatter();
-		// formatter.printHelp("run.sh", "qwe", options, "zxc", true);
-		// }
-
 	}
-
 	/*
-	 * private static Options createOptions() { Option help = new Option("h",
-	 * "help", false, "print this message"); Option version = new Option("v",
-	 * "version", false, "print the version information and exit"); Option
-	 * domain =
-	 * Option.builder("d").required().longOpt("domain").hasArg().argName("NAME")
-	 * .desc("domain name (e.g. java)").build(); Option subdomain =
-	 * Option.builder("s").required().longOpt("subdomain").hasArg().argName(
-	 * "NAME") .desc("subdomain name (e.g. java-advanced)").build();
-	 * 
-	 * Option run =
-	 * Option.builder("r").longOpt("run").desc("run all tests using maven").
-	 * build(); Option create =
 	 * Option.builder("c").longOpt("create").argName("CLASS").hasArg()
 	 * .desc("create solution from template").build(); Option list =
 	 * Option.builder("l").longOpt("list").
@@ -121,16 +111,5 @@ public class Cli {
 	 * desc("list yet unsolved challenges").build(); Option gen =
 	 * Option.builder("g").longOpt("generate-all").
 	 * desc("generate template for all unsolved challenges") .build(); Option
-	 * platf =
-	 * Option.builder("p").required().longOpt("NAME").numberOfArgs(1).argName(
-	 * "paltform") .valueSeparator(',').hasArgs().
-	 * desc("tests platform (hackerrank, codility)").build();
-	 * 
-	 * Options options = new Options(); options.addOption(help);
-	 * options.addOption(version); options.addOption(platf);
-	 * options.addOption(domain); options.addOption(subdomain);
-	 * options.addOption(run); options.addOption(create);
-	 * options.addOption(list); options.addOption(uns); options.addOption(gen);
-	 * return options; }
 	 */
 }

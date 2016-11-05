@@ -16,13 +16,12 @@ public class ChromeExecutor {
 		r.exec(s);
 	}
 
-	public static void openBrowser(String domain, String group) {
+	public static void openBrowser(String url) {
 		try {
-			String command = GOOGLECOMMAND
-					+ String.format("https://www.hackerrank.com/domains/%s/%s", domain, group);
+			String command = GOOGLECOMMAND + url;
 			open(command);
 			logger.info("Running command: " + command);
-			Thread.sleep(800);
+			Thread.sleep(200);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +29,7 @@ public class ChromeExecutor {
 
 	public static void saveAndCloseAll(String domain, String group) {
 		logger.info("Switch window to chrome");
-		RobotHelper.switchWindowAndSaveAll(domain+group);
+		RobotHelper.switchWindowAndSaveAll(domain + group);
 	}
 
 }

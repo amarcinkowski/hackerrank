@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import io.github.amarcinkowski.solutionframework.browser.ChromeExecutor;
+import io.github.amarcinkowski.solutionframework.browser.PageReader;
 import io.github.amarcinkowski.solutionframework.browser.RobotHelper;
 import io.github.amarcinkowski.utils.StringUtils;
 
@@ -60,7 +61,7 @@ public class HackerrankJson {
 	}
 
 	static List<String> unsolved(String domain, String subdomain) {
-		ChromeExecutor.openBrowser(domain, subdomain);
+		ChromeExecutor.openBrowser(PageReader.HACKERRANK_URL);
 		String pageContent = RobotHelper.getPageContent();
 		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
 		return StringUtils.findAllMultiline(p, pageContent);

@@ -43,7 +43,7 @@ public class RobotHelper {
 	}
 
 	private static void press(boolean alt, boolean ctrl, int keyCode) throws InterruptedException {
-		logger.debug("KEYPRESS " + (alt ? "ALT+" : "") + (ctrl ? "CTRL+" : "") + keyCode);
+		logger.trace("KEYPRESS " + (alt ? "ALT+" : "") + (ctrl ? "CTRL+" : "") + keyCode);
 		Thread.sleep(DELAY);
 		if (alt) {
 			robot.keyPress(KeyEvent.VK_ALT);
@@ -106,7 +106,7 @@ public class RobotHelper {
 	public static void switchWindowAndSaveAll(String file) {
 		try {
 			press(true, false, KeyEvent.VK_TAB);
-			Thread.sleep(1000);
+			Thread.sleep(600);
 
 			// go to 1st tab (chrome / firefox compatibile)
 			press(true, false, KeyEvent.VK_1);
@@ -118,9 +118,9 @@ public class RobotHelper {
 
 	public static String getSource() {
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			press(false, true, KeyEvent.VK_U);
-			Thread.sleep(1000);
+			Thread.sleep(400);
 			press(false, true, KeyEvent.VK_A);
 			press(false, true, KeyEvent.VK_C);
 			closePage();
