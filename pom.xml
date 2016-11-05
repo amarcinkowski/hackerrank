@@ -4,12 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.amarcinkowski</groupId>
 	<artifactId>hackerrank</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<scm>
 		<connection>scm:git:https://github.com/amarcinkowski/hackerrank</connection>
 		<tag>HEAD</tag>
 	</scm>
+	<distributionManagement>
+		<repository>
+			<id>myrepository</id>
+			<url>/home/amarcinkowski/.m2/repository</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
