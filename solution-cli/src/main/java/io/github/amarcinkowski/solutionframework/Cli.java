@@ -13,12 +13,12 @@ import com.beust.jcommander.Parameters;
 import io.github.amarcinkowski.utils.MavenUtils;
 
 @Parameters(commandDescription = "Run all tests", separators = "=")
-class RunCommand {
+class TestCommand {
 	@Parameter(names = { "-p", "--platform" }, description = "platform name e.g. hackerrank, codility", required = true)
 	public String platform;
 }
 
-class CreateCommand extends RunCommand {
+class CreateCommand extends TestCommand {
 	@Parameter(names = { "-d", "--domain" }, required = true)
 	public String domain;
 	@Parameter(names = { "-s", "--subdomain" }, required = true)
@@ -31,19 +31,23 @@ class CreateCommand extends RunCommand {
 
 public class Cli {
 
+	private static final String CREATE = "create";
+
+	private static final String TEST = "test";
+
 	@Parameter(names = { "-h", "--help" }, help = true, description = "this message")
 	private boolean help;
 
 	private static CreateCommand cc = new CreateCommand();
-	private static RunCommand rc = new RunCommand();
+	private static TestCommand tc = new TestCommand();
 
 	public static void main(String... args) throws IOException, MavenInvocationException, XPathExpressionException {
 
 		Cli cli = new Cli();
 		JCommander jc = new JCommander(cli);
-		jc.setProgramName("sf");
-		jc.addCommand("run", rc);
-		jc.addCommand("create", cc);
+		jc.setProgramName("run.sh");
+		jc.addCommand(TEST, tc);
+		jc.addCommand(CREATE, cc);
 		if (cli.help || args.length == 0) {
 			jc.usage();
 			return;
@@ -52,10 +56,10 @@ public class Cli {
 		try {
 			jc.parse(args);
 			switch (jc.getParsedCommand()) {
-			case "run":
-				MavenUtils.mavenInvoke(rc.platform);
+			case TEST:
+				MavenUtils.mavenInvoke(tc.platform);
 				break;
-			case "create":
+			case CREATE:
 				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain)
 						.platform(cc.platform).description(cc.description).build();
 				break;
