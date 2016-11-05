@@ -9,18 +9,18 @@ import org.jtwig.JtwigTemplate;
 
 public class TemplateUtils {
 
-	// TODO public -?> privatre
-	public static final String PLATFORM = "PLATFORM";
-	public static final String METHOD = "METHOD";
-	public static final String DESCRIPTION = "DESCRIPTION";
-	public static final String CLASS = "CLASS";
-	public static final String DOMAIN = "DOMAIN";
-	public static final String GROUP = "GROUP";
-	public static final String PACKAGE = "PACKAGE";
-	public static final String CLASSNAME = "CLASSNAME";
-
 	public static final String SOLUTION_TWIG_TEMPLATE = "solution-core/src/main/resources/solution.twig";
 	public static final String TEST_TWIG_TEMPLATE = "solution-core/src/main/resources/test.twig";
+
+	private static final String PLATFORM = "PLATFORM";
+	private static final String METHOD = "METHOD";
+	private static final String DESCRIPTION = "DESCRIPTION";
+	private static final String CLASS = "CLASS";
+	private static final String DOMAIN = "DOMAIN";
+	private static final String GROUP = "GROUP";
+	private static final String PACKAGE = "PACKAGE";
+	private static final String CLASSNAME = "CLASSNAME";
+
 
 	private static JtwigTemplate getTemplate(String twigFile) {
 		return JtwigTemplate.fileTemplate(new File(twigFile));
