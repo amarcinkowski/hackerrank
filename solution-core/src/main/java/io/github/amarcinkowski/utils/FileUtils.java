@@ -67,7 +67,7 @@ public class FileUtils {
 		}
 	}
 
-	public static File getInResourceFile(String solutionClass) {
+/*	public static File getInResourceFile(String solutionClass) {
 		return new File(SolutionUtils.getTestResourcePath(solutionClass) + IN_DATA_EXTENSION);
 	}
 
@@ -77,7 +77,7 @@ public class FileUtils {
 
 	public static File getExpectedResourceFile(String solutionClass) {
 		return new File(SolutionUtils.getTestResourcePath(solutionClass) + EXPECTED_EXTENSION);
-	}
+	}*/
 
 	public static String truncateFile(String filepath, String pattern) throws IOException {
 		try (Stream<String> lines = SolutionBuilder.fileToStream(filepath)) {

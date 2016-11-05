@@ -4,133 +4,128 @@ import java.io.IOException;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.log4j.Level;
 import org.apache.maven.shared.invoker.MavenInvocationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import io.github.amarcinkowski.solutionframework.SolutionBuilder;
-import io.github.amarcinkowski.solutionframework.browser.HackerrankPageReader;
-import io.github.amarcinkowski.utils.LoggingUtils;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.Parameters;
+
 import io.github.amarcinkowski.utils.MavenUtils;
-import io.github.amarcinkowski.utils.StringUtils;
-import io.github.amarcinkowski.utils.VersionUtils;
+
+@Parameters(commandDescription = "Run all tests", separators = "=")
+class RunCommand {
+	@Parameter(names = { "-p", "--platform" }, description = "platform name e.g. hackerrank, codility", required = true)
+	public String platform;
+}
+
+class CreateCommand extends RunCommand {
+	@Parameter(names = { "-d", "--domain" }, required = true)
+	public String domain;
+	@Parameter(names = { "-s", "--subdomain" }, required = true)
+	public String subdomain;
+	@Parameter(names = { "-c", "--classname" }, required = true)
+	public String classname;
+	@Parameter(names = { "-t", "--description" })
+	public String description;
+}
 
 public class Cli {
 
-	private final static Logger logger = LoggerFactory.getLogger(Cli.class);
+	@Parameter(names = { "-h", "--help" }, help = true, description = "this message")
+	private boolean help;
 
-	public static void main(String[] args) throws IOException, MavenInvocationException, XPathExpressionException {
-		logger.trace("main");
-		Options options = createOptions();
+	private static CreateCommand cc = new CreateCommand();
 
-		// create the parser
-		CommandLineParser parser = new DefaultParser();
-		try {
-			// parse the command line arguments
-			CommandLine line = parser.parse(options, args);
+	public static void main(String... args) throws IOException, MavenInvocationException, XPathExpressionException {
 
-			if (line.hasOption("quiet")) {
-				LoggingUtils.setLevel(Level.OFF);
-			}
-
-			if (line.hasOption("debug")) {
-				LoggingUtils.setLevel(Level.TRACE);
-			}
-
-			if (line.hasOption("run")) {
-				try {
-					MavenUtils.mavenInvoke();
-				} catch (Exception e) {
-					System.out.println("try running command: mvn test");
-				}
-			}
-
-			if (line.hasOption("unsolved")) {
-				String[] values = line.getOptionValues("u");
-				String domain = values[0];
-				String subdomain = values[1];
-				System.out.println(HackerrankJson.unsolved(domain, subdomain));
-			}
-
-			if (line.hasOption("generate-all")) {
-				String[] values = line.getOptionValues("g");
-				String domain = values[0];
-				String subdomain = values[1];
-				for (String challenge : HackerrankJson.unsolved(domain, subdomain)) {
-					String challengeNormalized = StringUtils.normalize(challenge);
-					String domainNormalized = StringUtils.normalize(domain);
-					String subdomainNormalized = StringUtils.normalize(subdomain);
-					create(challengeNormalized, domainNormalized, subdomainNormalized, domain + subdomain + challenge);
-				}
-			}
-
-			if (line.hasOption("list")) {
-				HackerrankPageReader.list();
-			}
-
-			if (line.hasOption("version")) {
-				VersionUtils.printVersion();
-			}
-
-			if (line.hasOption("create")) {
-				String[] values = line.getOptionValues("c");
-				String domain = values[0];
-				String subdomain = values[1];
-				String className = values[2];
-				String desc = values[3];
-				create(className, domain, subdomain, desc);
-			}
-
-			if (line.hasOption("help") || line.getOptions().length == 0) {
-				HelpFormatter formatter = new HelpFormatter();
-				formatter.printHelp("run.sh", options);
-			}
-
-		} catch (ParseException exp) {
-			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+		Cli cli = new Cli();
+		JCommander jc = new JCommander(cli);
+		jc.setProgramName("sf");
+		jc.addCommand("run", new RunCommand());
+		jc.addCommand("create", cc);
+		if (cli.help || args.length == 0) {
+			jc.usage();
+			return;
 		}
 
+		try {
+			jc.parse(args);
+			switch (jc.getParsedCommand()) {
+			case "run":
+				MavenUtils.mavenInvoke();
+				break;
+			case "create":
+				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain).platform(cc.platform)
+						.description(cc.description)./*createAll().*/build();
+				break;
+
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		/*
+		 * if (line.hasOption("unsolved")) { String[] values =
+		 * line.getOptionValues("u");
+		 * System.out.println(HackerrankJson.unsolved(domain, subdomain)); }
+		 * 
+		 * if (line.hasOption("generate-all")) { String[] values =
+		 * line.getOptionValues("g"); for (String challenge :
+		 * HackerrankJson.unsolved(domain, subdomain)) { String
+		 * challengeNormalized = StringUtils.normalize(challenge); String
+		 * domainNormalized = StringUtils.normalize(domain); String
+		 * subdomainNormalized = StringUtils.normalize(subdomain);
+		 * create(challengeNormalized, domainNormalized, subdomainNormalized,
+		 * domain + subdomain + challenge); } }
+		 * 
+		 * if (line.hasOption("list")) { HackerrankPageReader.list(); }
+		 * 
+		 * if (line.hasOption("version")) { VersionUtils.printVersion(); }
+		 * 
+		 */
+
+		// } catch (ParseException exp) {
+		// System.err.println(exp.getMessage());
+		// System.err.println("for help use: run.sh -h");
+		// HelpFormatter formatter = new HelpFormatter();
+		// formatter.printHelp("run.sh", "qwe", options, "zxc", true);
+		// }
+
 	}
 
-	private static void create(String className, String domain, String subdomain, String desc) throws IOException {
-		SolutionBuilder builder = new SolutionBuilder();
-		builder.className(className).subdomain(subdomain).domain(domain).description(desc).createAll().build();
-	}
-
-	private static Options createOptions() {
-		Option help = new Option("h", "help", false, "print this message");
-		Option version = new Option("v", "version", false, "print the version information and exit");
-		Option quiet = new Option("q", "quiet", false, "be extra quiet");
-		Option verbose = new Option("d", "debug", false, "be extra verbose");
-		Option run = Option.builder("r").longOpt("run").desc("run mvn test").build();
-		Option create = Option.builder("c").longOpt("create").numberOfArgs(3)
-				.argName("domain,subdomain,class,description").valueSeparator(',').hasArgs()
-				.desc("create solution from template").build();
-		Option list = Option.builder("l").longOpt("list").desc("list available domains |- subdomains (slug)").build();
-		Option uns = Option.builder("u").longOpt("unsolved").numberOfArgs(2).argName("domain,subdomain")
-				.valueSeparator(',').hasArgs().desc("list yet unsolved challenges").build();
-		Option gen = Option.builder("g").longOpt("generate-all").numberOfArgs(2).argName("domain,subdomain")
-				.valueSeparator(',').hasArgs().desc("generate template for all unsolved challenges").build();
-
-		Options options = new Options();
-		options.addOption(help);
-		options.addOption(version);
-		options.addOption(quiet);
-		options.addOption(verbose);
-		options.addOption(run);
-		options.addOption(create);
-		options.addOption(list);
-		options.addOption(uns);
-		options.addOption(gen);
-		return options;
-	}
-
+	/*
+	 * private static Options createOptions() { Option help = new Option("h",
+	 * "help", false, "print this message"); Option version = new Option("v",
+	 * "version", false, "print the version information and exit"); Option
+	 * domain =
+	 * Option.builder("d").required().longOpt("domain").hasArg().argName("NAME")
+	 * .desc("domain name (e.g. java)").build(); Option subdomain =
+	 * Option.builder("s").required().longOpt("subdomain").hasArg().argName(
+	 * "NAME") .desc("subdomain name (e.g. java-advanced)").build();
+	 * 
+	 * Option run =
+	 * Option.builder("r").longOpt("run").desc("run all tests using maven").
+	 * build(); Option create =
+	 * Option.builder("c").longOpt("create").argName("CLASS").hasArg()
+	 * .desc("create solution from template").build(); Option list =
+	 * Option.builder("l").longOpt("list").
+	 * desc("list available domains |- subdomains (slug)").build(); Option uns =
+	 * Option.builder("u").longOpt("unsolved").
+	 * desc("list yet unsolved challenges").build(); Option gen =
+	 * Option.builder("g").longOpt("generate-all").
+	 * desc("generate template for all unsolved challenges") .build(); Option
+	 * platf =
+	 * Option.builder("p").required().longOpt("NAME").numberOfArgs(1).argName(
+	 * "paltform") .valueSeparator(',').hasArgs().
+	 * desc("tests platform (hackerrank, codility)").build();
+	 * 
+	 * Options options = new Options(); options.addOption(help);
+	 * options.addOption(version); options.addOption(platf);
+	 * options.addOption(domain); options.addOption(subdomain);
+	 * options.addOption(run); options.addOption(create);
+	 * options.addOption(list); options.addOption(uns); options.addOption(gen);
+	 * return options; }
+	 */
 }

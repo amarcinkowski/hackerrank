@@ -42,8 +42,11 @@ public class SolutionTestSuite {
 		} catch (Exception e) {
 			stopTesting();
 		}
-		IOUtils.redirectIO(FileUtils.getInResourceFile(current.getName()),
-				FileUtils.getResultResourceFile(current.getName()));
+		System.out.println(current.in().getAbsolutePath());
+		System.out.println(current.in().exists());
+		System.out.println(current.out().getAbsolutePath());
+		System.out.println(current.out().exists());
+		IOUtils.redirectIO(current.in(),current.out());
 	}
 
 	@After
@@ -53,14 +56,13 @@ public class SolutionTestSuite {
 	}
 
 	private int getNumOfDiffs() throws IOException {
-		return FileUtils.diffsResultExpected(FileUtils.getResultResourceFile(current.getName()),
-				FileUtils.getExpectedResourceFile(current.getName()));
+		return FileUtils.diffsResultExpected(current.out(), current.expected());
 	}
 
 	private void printNumOfDiffs() {
 		try {
 			if (getNumOfDiffs() == 0) {
-				logger.info(String.format("\t :+1: (%s)", current.getName()));
+				logger.info(String.format("\t OK! (%s) ???? USE NAME?",  current.getClassName()));
 				Assert.assertTrue(true);
 			} else {
 				logger.warn("Expected and Result differs");
@@ -99,7 +101,9 @@ public class SolutionTestSuite {
 
 	static String getCanonical(TestInfo ti) {
 		String packageBase = String.format("%s.%s", Solution.PACKAGE, ti.platform());
-		return getCanonical(packageBase, StringUtils.packagify(ti.group()), ti.solutionClass());
+		String canonical = getCanonical(packageBase, StringUtils.packagify(ti.group()), ti.solutionClass());
+		System.out.println("CANONICAL>" + canonical);
+		return canonical;
 	}
 
 	static String getCanonical(String packagebase, String packagename, String classname) {
