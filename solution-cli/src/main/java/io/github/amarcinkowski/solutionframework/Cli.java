@@ -90,7 +90,7 @@ public class Cli {
 					String classname = StringUtils.camelify(challenge);
 					logger.info(String.format("%s => %s", challenge, classname));
 					new SolutionBuilder().className(classname).subdomain(gc.subdomain).domain(gc.domain)
-							.platform(gc.platform).description(challenge).build();
+							.platform(gc.platform).description(challenge.trim()).build();
 				}
 				break;
 
