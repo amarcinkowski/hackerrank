@@ -12,12 +12,12 @@ public class Solution implements Command {
 
 	private final static Logger logger = LoggerFactory.getLogger(Solution.class);
 
-	public final static String PACKAGE = "io.github.amarcinkowski";
 	private static final String SOLUTION_FILE = "%s-solutions/src/main/java/io/github/amarcinkowski/%s/%s/%s.java";
-	private static final String IO_DATA_FILE = "%s-solutions/src/test/resources/%s/%s.%s";
+	private static final String IO_DATA_FILE = "src/test/resources/%s/%s.%s";
 
 	// private final String name;
 	private String platform;
+	// TODO rename to classname
 	private String className;
 	private String domain;
 	private String subdomain;
@@ -81,17 +81,18 @@ public class Solution implements Command {
 	}
 
 	public File in() {
-		String path = String.format(IO_DATA_FILE, platform, StringUtils.packagify(subdomain), className, ".in");
+		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "in");
 		return new File(path);
 	}
 
 	public File out() {
-		String path = String.format(IO_DATA_FILE, platform, StringUtils.packagify(subdomain), className, ".out");
+		// TODO rename files result->out
+		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "result");
 		return new File(path);
 	}
 
 	public File expected() {
-		String path = String.format(IO_DATA_FILE, platform, StringUtils.packagify(subdomain), className, ".expected");
+		String path = String.format(IO_DATA_FILE, StringUtils.packagify(subdomain), className, "expected");
 		return new File(path);
 	}
 

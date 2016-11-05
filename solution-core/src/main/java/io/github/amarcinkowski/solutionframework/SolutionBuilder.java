@@ -17,6 +17,7 @@ public class SolutionBuilder {
 	private static final String CLASS_END = "\n}\n";
 
 	private String platform;
+	// TODO rename to classname
 	private String className;
 	private String domain;
 	private String subdomain;

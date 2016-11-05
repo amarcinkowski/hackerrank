@@ -13,6 +13,7 @@ public @interface TestInfo {
 	
 	String taskDescription() default "";
 
+	// TODO rename to classname
 	String solutionClass();
 
 	String domain() default "";

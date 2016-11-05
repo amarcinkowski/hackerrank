@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import io.github.amarcinkowski.solutionframework.exception.MissingAnnotationException;
 import io.github.amarcinkowski.utils.FileUtils;
 import io.github.amarcinkowski.utils.IOUtils;
-import io.github.amarcinkowski.utils.StringUtils;
 
 public class SolutionTestSuite {
 
@@ -42,11 +41,9 @@ public class SolutionTestSuite {
 		} catch (Exception e) {
 			stopTesting();
 		}
-		System.out.println(current.in().getAbsolutePath());
-		System.out.println(current.in().exists());
-		System.out.println(current.out().getAbsolutePath());
-		System.out.println(current.out().exists());
-		IOUtils.redirectIO(current.in(),current.out());
+		logger.trace(current.in().getAbsolutePath() + current.in().exists());
+		logger.trace(current.out().getAbsolutePath() + current.out().exists());
+		IOUtils.redirectIO(current.in(), current.out());
 	}
 
 	@After
@@ -62,7 +59,7 @@ public class SolutionTestSuite {
 	private void printNumOfDiffs() {
 		try {
 			if (getNumOfDiffs() == 0) {
-				logger.info(String.format("\t OK! (%s) ???? USE NAME?",  current.getClassName()));
+				logger.info(String.format(" |\tOK! (%s)", current.getClassName()));
 				Assert.assertTrue(true);
 			} else {
 				logger.warn("Expected and Result differs");
@@ -99,12 +96,14 @@ public class SolutionTestSuite {
 		return ti;
 	}
 
-	static String getCanonical(TestInfo ti) {
-		String packageBase = String.format("%s.%s", Solution.PACKAGE, ti.platform());
-		String canonical = getCanonical(packageBase, StringUtils.packagify(ti.group()), ti.solutionClass());
-		System.out.println("CANONICAL>" + canonical);
-		return canonical;
-	}
+	// static String getCanonical(TestInfo ti) {
+	// String packageBase = String.format("%s.%s", Solution.PACKAGE,
+	// ti.platform());
+	// String canonical = getCanonical(packageBase,
+	// StringUtils.packagify(ti.group()), ti.solutionClass());
+	// System.out.println("CANONICAL>" + canonical);
+	// return canonical;
+	// }
 
 	static String getCanonical(String packagebase, String packagename, String classname) {
 		return String.format("%s.%s.%s", packagebase, packagename, classname);
@@ -114,8 +113,8 @@ public class SolutionTestSuite {
 			throws NoSuchMethodException, SecurityException, ClassNotFoundException, MissingAnnotationException {
 		Method currentlyRuningTest = getCurrentlyRunningTest();
 		TestInfo ti = getTestInfo(currentlyRuningTest);
-		String canonical = getCanonical(ti);
-		current = factory.getSolution(canonical);
+		// String canonical = getCanonical(ti);
+		current = factory.getSolution(ti);
 	}
 
 	public void runTest() {
