@@ -1,6 +1,6 @@
 language: java
 env:
-  - MAVEN_HOME = /usr/local/maven
+  - M2_HOME = /usr/local/maven
 jdk:
   - oraclejdk8
 cache:
