@@ -5,18 +5,25 @@ import java.io.IOException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
+import io.github.amarcinkowski.solutionframework.browser.HackerrankJson;
 import io.github.amarcinkowski.solutionframework.browser.PageReader;
 import io.github.amarcinkowski.solutionframework.command.CreateCommand;
+import io.github.amarcinkowski.solutionframework.command.GenerateCommand;
 import io.github.amarcinkowski.solutionframework.command.ListCommand;
 import io.github.amarcinkowski.solutionframework.command.TestCommand;
 import io.github.amarcinkowski.utils.MavenUtils;
 import io.github.amarcinkowski.utils.PopertiesUtils;
+import io.github.amarcinkowski.utils.StringUtils;
 
 public class Cli {
+
+	private final static Logger logger = LoggerFactory.getLogger(Cli.class);
 
 	private static final String CODILITY = "codility";
 	private static final String HACKERRANK = "hackerrank";
@@ -36,6 +43,7 @@ public class Cli {
 		CreateCommand cc = new CreateCommand();
 		TestCommand tc = new TestCommand();
 		ListCommand lc = new ListCommand();
+		GenerateCommand gc = new GenerateCommand();
 
 		Cli cli = new Cli();
 		JCommander jc = new JCommander(cli);
@@ -43,6 +51,7 @@ public class Cli {
 		jc.addCommand(TEST, tc);
 		jc.addCommand(CREATE, cc);
 		jc.addCommand(LIST, lc);
+		jc.addCommand("generate", gc);
 
 		try {
 			jc.parse(args);
@@ -76,6 +85,14 @@ public class Cli {
 					break;
 				}
 				break;
+			case "generate":
+				for (String challenge : HackerrankJson.unsolved(gc.domain, gc.subdomain)) {
+					String classname = StringUtils.camelify(StringUtils.normalize(challenge));
+					logger.info(String.format("%s => %s", challenge, classname));
+					new SolutionBuilder().className(classname).subdomain(gc.subdomain).domain(gc.domain)
+							.platform(gc.platform).description(challenge).build();
+				}
+				break;
 
 			default:
 				break;
@@ -87,17 +104,6 @@ public class Cli {
 				e.printStackTrace();
 			}
 		}
-
-		/*
-		 * if (line.hasOption("unsolved")) { String[] values =
-		 * 
-		 * System.out.println(HackerrankJson.unsolved(domain, subdomain)); }
-		 * 
-		 * if (line.hasOption("generate-all")) { String[] values =
-		 * line.getOptionValues("g"); for (String challenge :
-		 * HackerrankJson.unsolved(domain, subdomain)) { String
-		 * 
-		 */
 
 	}
 }
