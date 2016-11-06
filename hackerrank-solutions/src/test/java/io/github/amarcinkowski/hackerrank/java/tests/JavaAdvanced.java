@@ -13,13 +13,6 @@ public class JavaAdvanced extends SolutionTestSuite {
 		runTest();
 	}
 
-	// TODO remove dupli
-	@Test
-	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "SimpleAddition", taskDescription = "Java Varargs - Simple Addition")
-	public void simpleAddition() {
-		runTest();
-	}
-
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "PrimeChecker", taskDescription = "Prime Checker")
 	public void primeChecker() {
