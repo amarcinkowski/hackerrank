@@ -1,8 +1,15 @@
 package io.github.amarcinkowski.hackerrank.javaadvanced;
 
 import java.util.Scanner;
+
 import io.github.amarcinkowski.solutionframework.Solution;
 import io.github.amarcinkowski.solutionframework.TestInfo;
+
+/*
+ * imports
+ */
+import java.security.MessageDigest;
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 public class JavaSha256 extends Solution {
 public JavaSha256(TestInfo ti) {super(ti);}	/*
@@ -16,7 +23,15 @@ public JavaSha256(TestInfo ti) {super(ti);}	/*
 	public void execute() {
 		log("execute");
 		scanner = new Scanner(System.in);
-		int x = scanner.nextInt();
+		String s = scanner.next();
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			String hex = (new HexBinaryAdapter()).marshal(digest.digest(s.getBytes())).toLowerCase();
+			log(hex);
+			System.out.println(hex);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 // hr:

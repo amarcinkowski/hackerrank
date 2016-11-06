@@ -33,7 +33,6 @@ public JavaMd5(TestInfo ti) {super(ti);}	/*
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 // hr:
