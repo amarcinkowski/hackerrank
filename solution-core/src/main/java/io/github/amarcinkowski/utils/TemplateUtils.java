@@ -10,6 +10,7 @@ import org.jtwig.JtwigTemplate;
 public class TemplateUtils {
 
 	public static final String SOLUTION_TWIG_TEMPLATE = "solution-core/src/main/resources/solution.twig";
+	public static final String SUITE_TWIG_TEMPLATE = "solution-core/src/main/resources/suite.twig";
 	public static final String TEST_TWIG_TEMPLATE = "solution-core/src/main/resources/test.twig";
 
 	private static final String PLATFORM = "PLATFORM";
@@ -21,11 +22,14 @@ public class TemplateUtils {
 	private static final String PACKAGE = "PACKAGE";
 	private static final String CLASSNAME = "CLASSNAME";
 
-
 	private static JtwigTemplate getTemplate(String twigFile) {
 		return JtwigTemplate.fileTemplate(new File(twigFile));
 	}
 
+	public static String getRenderedSuiteTemplate(String className, String packageName) {
+		JtwigModel model = JtwigModel.newModel().with(CLASSNAME, className).with(PACKAGE, packageName);
+		return getTemplate(SUITE_TWIG_TEMPLATE).render(model);
+	}
 	public static String getRenderedTemplate(String className, String packageName) {
 		JtwigModel model = JtwigModel.newModel().with(CLASSNAME, className).with(PACKAGE, packageName);
 		return getTemplate(SOLUTION_TWIG_TEMPLATE).render(model);

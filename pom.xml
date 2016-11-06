@@ -54,7 +54,8 @@
 
 	<modules>
 		<module>solution-core</module>
-		<module>hackerrank-solutions</module>
 		<module>solution-cli</module>
+		<module>hackerrank-solutions</module>
+		<module>codility-solutions</module>
 	</modules>
 </project>

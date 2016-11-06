@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.amarcinkowski.utils.FileUtils;
+import io.github.amarcinkowski.utils.StringUtils;
 import io.github.amarcinkowski.utils.TemplateUtils;
 
 public class SolutionBuilder {
@@ -35,18 +36,25 @@ public class SolutionBuilder {
 		File file = solution.suite();
 		String truncated = FileUtils.truncateFile(file.getAbsolutePath(), CLASS_ENDING_PATTERN);
 		String method = TemplateUtils.getRenderedTemplate(solution.getPlatform(), solution.getDomain(),
-				solution.getSubdomain(), solution.getClassName(), solution.getDescription());
+				solution.getSubdomain(), solution.getClassname(), solution.getDescription());
 		String contents = new StringBuilder().append(truncated).append(method).append(CLASS_END).toString();
 		Files.write(Paths.get(file.getAbsolutePath()), contents.getBytes());
 	}
 
 	private void createFiles(Solution solution) throws IOException {
 		FileUtils.createFileIfNotExisting(solution.java());
-		String template = TemplateUtils.getRenderedTemplate(solution.getClassName(), solution.getPackage());
+		String template = TemplateUtils.getRenderedTemplate(solution.getClassname(), solution.getPackage());
 		Files.write(solution.java().toPath(), template.getBytes());
 		FileUtils.createFileIfNotExisting(solution.expected());
 		FileUtils.createFileIfNotExisting(solution.in());
 		FileUtils.createFileIfNotExisting(solution.suite());
+		if (Files.readAllBytes(solution.suite().toPath()).length < 1) {
+			// TODO ONE SAME PACKAGE in TEST & SOLUTION (?)
+			String subdomainC = StringUtils.camelify(solution.getSubdomain());
+			String packageName = String.format("io.github.amarcinkowski.%s.%s.tests", solution.getPlatform(), solution.getDomain());
+			String suitetemplate = TemplateUtils.getRenderedSuiteTemplate(subdomainC, packageName);
+			Files.write(solution.java().toPath(), suitetemplate.getBytes());
+		}
 		appendMethodToTestSuite(solution);
 	}
 

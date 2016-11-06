@@ -63,7 +63,7 @@ public class SolutionTestSuite {
 	private void printNumOfDiffs() {
 		try {
 			if (getNumOfDiffs() == 0) {
-				logger.info(String.format(" |= OK! (%s)", current.getClassName()));
+				logger.info(String.format(" |= OK! (%s)", current.getClassname()));
 				Assert.assertTrue(true);
 			} else {
 				logger.warn(" |= Expected and Result differs");
