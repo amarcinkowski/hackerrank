@@ -59,11 +59,10 @@ public class HackerrankJson {
 	}
 
 	public static List<String> unsolved(String domain, String subdomain) {
-		ChromeExecutor.openBrowser(PageReader.HACKERRANK_URL);
+		ChromeExecutor.openBrowser(String.format(PageReader.HACKERRANK_URL, domain, subdomain));
 		String pageContent = RobotHelper.getPageContent();
 		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
 		return SearchUtils.findAllMultiline(p, pageContent);
 	}
-
 
 }

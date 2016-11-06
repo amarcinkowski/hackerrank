@@ -18,7 +18,7 @@ public class SolutionBuilder {
 
 	
 	// TODO add \\z \\Z on the END as EOF pattern
-	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n";
+	private static final String CLASS_ENDING_PATTERN = "\\s*+}\\s*+\n\\s*+\\Z";
 	private static final String CLASS_END = "\n}\n";
 
 	private String platform;

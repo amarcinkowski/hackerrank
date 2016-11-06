@@ -79,7 +79,7 @@ public class Cli {
 			case LIST:
 				switch (lc.platform) {
 				case HACKERRANK:
-					String source = PageReader.source(PageReader.HACKERRANK_URL);
+					String source = PageReader.source(String.format(PageReader.HACKERRANK_URL,"java","java-introduction"));
 					PageReader.printList(source);
 					break;
 				case CODILITY:
