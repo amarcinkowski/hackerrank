@@ -6,7 +6,7 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 
 | feature | ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank | ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png) |
 |---|---|---|
-| list | :heavy_check_mark: | - |
+| list | :heavy_check_mark: | :heavy_check_mark: |
 | create | :heavy_check_mark: | :heavy_check_mark: |
 | generate | :heavy_check_mark: | - |
 | test | :heavy_check_mark: | :heavy_check_mark: |
