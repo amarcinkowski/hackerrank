@@ -18,14 +18,8 @@ Usage: run.sh [options] [command] [command options]
   Options:
     -h, --help
       this message
-Usage: run.sh [options] [command] [command options]
-  Options:
-    -h, --help
-      this message
-      Default: false
     -v, --version
       version information
-      Default: false
   Commands:
     test      runs the solutions suite for selected platform
       Usage: test [options]
