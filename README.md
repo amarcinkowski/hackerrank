@@ -6,7 +6,7 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 
 | feature | ![HackerRank](https://amarcinkowski.github.io/imgs/solutions-framework/hackerrank.png) HackerRank | ![codility](https://amarcinkowski.github.io/imgs/solutions-framework/codility.png) |
 |---|---|---|
-| list | :heavy_check_mark: | - |
+| list | :heavy_check_mark: | :heavy_check_mark: |
 | create | :heavy_check_mark: | :heavy_check_mark: |
 | generate | :heavy_check_mark: | - |
 | test | :heavy_check_mark: | :heavy_check_mark: |
@@ -18,18 +18,16 @@ Usage: run.sh [options] [command] [command options]
   Options:
     -h, --help
       this message
-      Default: false
     -v, --version
       version information
-      Default: false
   Commands:
-    test      null
+    test      runs the solutions suite for selected platform
       Usage: test [options]
         Options:
         * -p, --platform
             platform name e.g. hackerrank, codility
 
-    create      null
+    create      create solution class from template and in/out/expected files
       Usage: create [options]
         Options:
         * -c, --classname
@@ -43,13 +41,13 @@ Usage: run.sh [options] [command] [command options]
         * -s, --subdomain
 
 
-    list      null
+    list      lists available challenges domains/subdomains
       Usage: list [options]
         Options:
         * -p, --platform
             platform name e.g. hackerrank, codility
 
-    generate      null
+    generate      generates all (yet unsolved) solution files from templates
       Usage: generate [options]
         Options:
         * -d, --domain
@@ -57,8 +55,6 @@ Usage: run.sh [options] [command] [command options]
         * -p, --platform
             platform name e.g. hackerrank, codility
         * -s, --subdomain
-
-
 ```
 ## Features
 
