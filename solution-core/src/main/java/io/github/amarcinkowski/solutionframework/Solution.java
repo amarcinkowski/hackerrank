@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import io.github.amarcinkowski.solutionframework.exception.NotImplementedException;
 import io.github.amarcinkowski.utils.StringUtils;
 
-public class Solution implements Command {
+public class Solution extends InputHandler implements Command {
 
 	private static final String PACKAGE = "io.github.amarcinkowski.%s.%s";
 
