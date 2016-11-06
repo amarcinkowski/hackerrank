@@ -4,5 +4,7 @@ jdk:
 cache:
   directories:
   - $HOME/.m2
-script: ./run.sh test -p hackerrank 
+script: 
+  - ./run.sh test -p hackerrank 
+  - ./run.sh test -p codility 
 before_cache: rm -rf $HOME/.m2/repository/io/github/amarcinkowski 
