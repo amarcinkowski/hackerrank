@@ -27,9 +27,9 @@ public class Solution implements Command {
 
 	public Solution(TestInfo ti) {
 		this.platform = ti.platform();
-		this.classname = ti.solutionClass();
+		this.classname = ti.classname();
 		this.domain = ti.domain();
-		this.subdomain = ti.group();
+		this.subdomain = ti.subdomain();
 		this.description = ti.taskDescription();
 	}
 

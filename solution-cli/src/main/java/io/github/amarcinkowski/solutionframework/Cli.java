@@ -23,6 +23,8 @@ import io.github.amarcinkowski.utils.StringUtils;
 
 public class Cli {
 
+	private static final String GENERATE = "generate";
+
 	private final static Logger logger = LoggerFactory.getLogger(Cli.class);
 
 	private static final String CODILITY = "codility";
@@ -40,6 +42,7 @@ public class Cli {
 
 	public static void main(String... args) throws IOException, MavenInvocationException, XPathExpressionException {
 
+		// TODO add commands descr
 		CreateCommand cc = new CreateCommand();
 		TestCommand tc = new TestCommand();
 		ListCommand lc = new ListCommand();
@@ -51,7 +54,7 @@ public class Cli {
 		jc.addCommand(TEST, tc);
 		jc.addCommand(CREATE, cc);
 		jc.addCommand(LIST, lc);
-		jc.addCommand("generate", gc);
+		jc.addCommand(GENERATE, gc);
 
 		try {
 			jc.parse(args);
@@ -85,7 +88,7 @@ public class Cli {
 					break;
 				}
 				break;
-			case "generate":
+			case GENERATE:
 				for (String challenge : HackerrankJson.unsolved(gc.domain, gc.subdomain)) {
 					String classname = StringUtils.camelify(challenge);
 					logger.info(String.format("%s => %s", challenge, classname));

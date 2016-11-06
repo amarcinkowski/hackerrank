@@ -81,7 +81,7 @@ public class SolutionTestSuite {
 	}
 
 	private void checkAnnotations(TestInfo ti, String testname) throws MissingAnnotationException {
-		if (ti == null || ti.group().equals("") || ti.solutionClass().equals("")) {
+		if (ti == null || ti.subdomain().equals("") || ti.classname().equals("")) {
 			throw new MissingAnnotationException(testname);
 		}
 	}

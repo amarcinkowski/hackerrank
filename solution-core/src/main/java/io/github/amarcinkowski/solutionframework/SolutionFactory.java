@@ -32,7 +32,7 @@ public class SolutionFactory {
 	}
 
 	private String getCanonicalClass(TestInfo ti) {
-		return String.format(CANONICAL_CLASS, ti.platform(), StringUtils.packagify(ti.group()), ti.solutionClass());
+		return String.format(CANONICAL_CLASS, ti.platform(), StringUtils.packagify(ti.subdomain()), ti.classname());
 	}
 
 }

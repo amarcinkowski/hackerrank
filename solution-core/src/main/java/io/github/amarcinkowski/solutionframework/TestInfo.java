@@ -13,12 +13,10 @@ public @interface TestInfo {
 	
 	String taskDescription() default "";
 
-	// TODO rename to classname
-	String solutionClass();
+	String classname();
 
 	String domain() default "";
 
-	// TODO rename to subdomain
-	String group();
+	String subdomain();
 
 }
