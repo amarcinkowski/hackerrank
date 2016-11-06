@@ -55,8 +55,8 @@ public class SolutionTestSuite {
 
 	private int getNumOfDiffs() throws IOException {
 		int diffs = FileUtils.diffsResultExpected(current.out(), current.expected());
-		Assert.assertEquals(new String(Files.readAllBytes(current.out().toPath())),
-				new String(Files.readAllBytes(current.expected().toPath())));
+		Assert.assertEquals(new String(Files.readAllBytes(current.expected().toPath())),
+				new String(Files.readAllBytes(current.out().toPath())));
 		return diffs;
 	}
 
