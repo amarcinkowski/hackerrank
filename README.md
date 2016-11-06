@@ -13,15 +13,51 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 ### run.sh
 
 ```
- -c,--create <domain,subdomain,class,description>   create solution from template
- -d,--debug                                         be extra verbose
- -g,--generate-all <domain,subdomain>               generate template for all unsolved challenges
- -h,--help                                          print this message
- -l,--list                                          list available domains |- subdomains (slug)
- -q,--quiet                                         be extra quiet
- -r,--run                                           run mvn test
- -u,--unsolved <domain,subdomain>                   list yet unsolved challenges
- -v,--version                                       print the version information and exit
+Usage: run.sh [options] [command] [command options]
+  Options:
+    -h, --help
+      this message
+      Default: false
+    -v, --version
+      version information
+      Default: false
+  Commands:
+    test      null
+      Usage: test [options]
+        Options:
+        * -p, --platform
+            platform name e.g. hackerrank, codility
+
+    create      null
+      Usage: create [options]
+        Options:
+        * -c, --classname
+
+          -t, --description
+
+        * -d, --domain
+
+        * -p, --platform
+            platform name e.g. hackerrank, codility
+        * -s, --subdomain
+
+
+    list      null
+      Usage: list [options]
+        Options:
+        * -p, --platform
+            platform name e.g. hackerrank, codility
+
+    generate      null
+      Usage: generate [options]
+        Options:
+        * -d, --domain
+
+        * -p, --platform
+            platform name e.g. hackerrank, codility
+        * -s, --subdomain
+
+
 ```
 ## Features
 
@@ -32,6 +68,8 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
  - template engine: jtwig
 - Tech stack: java 8 / maven
 - Tools: git flow
+
+*solution-framework* is *TDD* compatibile - it creates *red* tests, you'll have to go *green* yourself.
 
 # License
 
