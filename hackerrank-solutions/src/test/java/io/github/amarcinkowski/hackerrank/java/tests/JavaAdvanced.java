@@ -13,6 +13,7 @@ public class JavaAdvanced extends SolutionTestSuite {
 		runTest();
 	}
 
+	// TODO remove dupli
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "SimpleAddition", taskDescription = "Java Varargs - Simple Addition")
 	public void simpleAddition() {
@@ -60,5 +61,23 @@ public class JavaAdvanced extends SolutionTestSuite {
 	public void lambdaExpressions() {
 		runTest();
 	}
+	@Test
+	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "JavaVarargsSimpleAddition", taskDescription = "Java Varargs - Simple Addition")
+	public void javaVarargsSimpleAddition() {
+		runTest();
+	}
+
+	@Test
+	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "JavaMd5", taskDescription = "Java MD5")
+	public void javaMd5() {
+		runTest();
+	}
+
+	@Test
+	@TestInfo(platform = "hackerrank", domain = "java", subdomain = "java-advanced", classname = "JavaSha256", taskDescription = "Java SHA-256")
+	public void javaSha256() {
+		runTest();
+	}
+
 
 }

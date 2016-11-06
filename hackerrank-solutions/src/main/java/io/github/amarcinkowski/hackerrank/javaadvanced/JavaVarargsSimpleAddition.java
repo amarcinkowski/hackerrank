@@ -9,8 +9,8 @@ import java.util.Set;
 import io.github.amarcinkowski.solutionframework.Solution;
 import io.github.amarcinkowski.solutionframework.TestInfo;
 
-public class SimpleAddition extends Solution {
-public SimpleAddition(TestInfo ti) {super(ti);}	/*
+public class JavaVarargsSimpleAddition extends Solution {
+public JavaVarargsSimpleAddition(TestInfo ti) {super(ti);}	/*
 * COPY FROM LINE BELOW:
 
 	private void log(String msg) {}
