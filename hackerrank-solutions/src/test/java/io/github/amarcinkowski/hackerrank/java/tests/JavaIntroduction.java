@@ -48,40 +48,35 @@ public class JavaIntroduction extends SolutionTestSuite {
 	public void javaStaticInitializerBlock() {
 		runTest();
 	}
-	
+
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", group = "java-introduction", solutionClass = "JavaLoops1", taskDescription = "Java Loops I")
 	public void javaLoops1() {
 		runTest();
 	}
 
-	
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", group = "java-introduction", solutionClass = "JavaStdinAndStdoutI", taskDescription = "Java Stdin and Stdout I")
 	public void javaStdinAndStdoutI() {
 		runTest();
 	}
 
-	
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", group = "java-introduction", solutionClass = "JavaIntToString", taskDescription = "Java Int to String")
 	public void javaIntToString() {
 		runTest();
 	}
 
-	
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", group = "java-introduction", solutionClass = "JavaDateAndTime", taskDescription = "Java Date and Time")
 	public void javaDateAndTime() {
 		runTest();
 	}
 
-	
 	@Test
 	@TestInfo(platform = "hackerrank", domain = "java", group = "java-introduction", solutionClass = "JavaCurrencyFormatter", taskDescription = "Java Currency Formatter")
 	public void javaCurrencyFormatter() {
 		runTest();
 	}
-
 
 }
