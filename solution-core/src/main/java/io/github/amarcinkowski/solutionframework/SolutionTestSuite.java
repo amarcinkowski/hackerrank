@@ -2,6 +2,7 @@ package io.github.amarcinkowski.solutionframework;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -53,7 +54,10 @@ public class SolutionTestSuite {
 	}
 
 	private int getNumOfDiffs() throws IOException {
-		return FileUtils.diffsResultExpected(current.out(), current.expected());
+		int diffs = FileUtils.diffsResultExpected(current.out(), current.expected());
+		Assert.assertEquals(new String(Files.readAllBytes(current.out().toPath())),
+				new String(Files.readAllBytes(current.expected().toPath())));
+		return diffs;
 	}
 
 	private void printNumOfDiffs() {
