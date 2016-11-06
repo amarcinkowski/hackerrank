@@ -53,7 +53,7 @@ public class SolutionBuilder {
 			String subdomainC = StringUtils.camelify(solution.getSubdomain());
 			String packageName = String.format("io.github.amarcinkowski.%s.%s.tests", solution.getPlatform(), solution.getDomain());
 			String suitetemplate = TemplateUtils.getRenderedSuiteTemplate(subdomainC, packageName);
-			Files.write(solution.java().toPath(), suitetemplate.getBytes());
+			Files.write(solution.suite().toPath(), suitetemplate.getBytes());
 		}
 		appendMethodToTestSuite(solution);
 	}
