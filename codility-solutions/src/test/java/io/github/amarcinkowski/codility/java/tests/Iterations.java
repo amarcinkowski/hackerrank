@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.codility.lesson1.tests;
+package io.github.amarcinkowski.codility.java.tests;
 
 import org.junit.Test;
 
