@@ -70,6 +70,7 @@ public class Cli {
 			case CREATE:
 				new SolutionBuilder().className(cc.classname).subdomain(cc.subdomain).domain(cc.domain)
 						.platform(cc.platform).description(cc.description).build();
+				break;
 			case LIST:
 				switch (lc.platform) {
 				case HACKERRANK:
