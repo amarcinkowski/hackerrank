@@ -18,18 +18,22 @@ Usage: run.sh [options] [command] [command options]
   Options:
     -h, --help
       this message
+Usage: run.sh [options] [command] [command options]
+  Options:
+    -h, --help
+      this message
       Default: false
     -v, --version
       version information
       Default: false
   Commands:
-    test      null
+    test      runs the solutions suite for selected platform
       Usage: test [options]
         Options:
         * -p, --platform
             platform name e.g. hackerrank, codility
 
-    create      null
+    create      create solution class from template and in/out/expected files
       Usage: create [options]
         Options:
         * -c, --classname
@@ -43,13 +47,13 @@ Usage: run.sh [options] [command] [command options]
         * -s, --subdomain
 
 
-    list      null
+    list      lists available challenges domains/subdomains
       Usage: list [options]
         Options:
         * -p, --platform
             platform name e.g. hackerrank, codility
 
-    generate      null
+    generate      generates all (yet unsolved) solution files from templates
       Usage: generate [options]
         Options:
         * -d, --domain
@@ -57,8 +61,6 @@ Usage: run.sh [options] [command] [command options]
         * -p, --platform
             platform name e.g. hackerrank, codility
         * -s, --subdomain
-
-
 ```
 ## Features
 
