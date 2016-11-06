@@ -8,7 +8,8 @@ Easy usage of IDE (eclipse & IDEA) tools in solving programming challenges.
 |---|---|---|
 | list | :heavy_check_mark: | - |
 | create | :heavy_check_mark: | :heavy_check_mark: |
-| generate-all | :heavy_check_mark: | - |
+| generate | :heavy_check_mark: | - |
+| test | :heavy_check_mark: | :heavy_check_mark: |
 
 ### run.sh
 
