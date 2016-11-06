@@ -1,4 +1,4 @@
-package io.github.amarcinkowski.solutionframework.browser;
+package io.github.amarcinkowski.solutionframework.platform;
 
 import java.io.IOException;
 

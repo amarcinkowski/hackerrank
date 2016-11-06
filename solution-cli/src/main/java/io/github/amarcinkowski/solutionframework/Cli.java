@@ -5,27 +5,21 @@ import java.io.IOException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
-import io.github.amarcinkowski.solutionframework.browser.HackerrankJson;
-import io.github.amarcinkowski.solutionframework.browser.PageReader;
 import io.github.amarcinkowski.solutionframework.command.CreateCommand;
 import io.github.amarcinkowski.solutionframework.command.GenerateCommand;
 import io.github.amarcinkowski.solutionframework.command.ListCommand;
 import io.github.amarcinkowski.solutionframework.command.TestCommand;
+import io.github.amarcinkowski.solutionframework.platform.PageReader;
 import io.github.amarcinkowski.utils.MavenUtils;
 import io.github.amarcinkowski.utils.PopertiesUtils;
-import io.github.amarcinkowski.utils.StringUtils;
 
 public class Cli {
 
 	private static final String GENERATE = "generate";
-
-	private final static Logger logger = LoggerFactory.getLogger(Cli.class);
 
 	private static final String CODILITY = "codility";
 	private static final String HACKERRANK = "hackerrank";
@@ -79,28 +73,30 @@ public class Cli {
 			case LIST:
 				switch (lc.platform) {
 				case HACKERRANK:
-					String source = PageReader.source(String.format(PageReader.HACKERRANK_URL,"java","java-introduction"));
-					PageReader.printList(source);
+					PageReader.printList(PageReader.HACKERRANK_URL);
 					break;
 				case CODILITY:
-					source = PageReader.source(PageReader.CODILITY_URL);
-					System.out.println(source);
+					PageReader.printList(PageReader.CODILITY_URL);
 					break;
 				}
 				break;
 			case GENERATE:
-				for (String challenge : HackerrankJson.unsolved(gc.domain, gc.subdomain)) {
-					String classname = StringUtils.camelify(challenge);
-					logger.info(String.format("%s => %s", challenge, classname));
-					new SolutionBuilder().className(classname).subdomain(gc.subdomain).domain(gc.domain)
-							.platform(gc.platform).description(challenge.trim()).build();
+				switch (gc.platform) {
+				case HACKERRANK:
+					PageReader.generate(PageReader.HACKERRANK_URL, gc.platform, gc.domain, gc.subdomain);
+					break;
+				case CODILITY:
+					PageReader.generate(PageReader.CODILITY_URL, gc.platform, gc.domain, gc.subdomain);
+					break;
 				}
 				break;
 
 			default:
 				break;
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			if (e.getMessage() != null) {
 				System.err.println(e.getMessage());
 			} else {

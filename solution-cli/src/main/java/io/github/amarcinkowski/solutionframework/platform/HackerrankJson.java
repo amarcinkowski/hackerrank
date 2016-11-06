@@ -1,13 +1,9 @@
-package io.github.amarcinkowski.solutionframework.browser;
-
-import java.util.List;
+package io.github.amarcinkowski.solutionframework.platform;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import io.github.amarcinkowski.utils.SearchUtils;
 
 public class HackerrankJson {
 
@@ -18,8 +14,6 @@ public class HackerrankJson {
 	private static final String SLUG = "slug";
 	private static final String NAME = "name";
 	private static final String FORMAT = " |- %-34s <%s,%s>\n";
-	private static final String UNSOLVED_CHALLENGE_PATTERN = "([A-Za-z0-9\\- ]+)\nSuccess Rate: .{2,7} Max Score: [0-9]+ Difficulty: [A-Za-z]+ Solve Challenge\n";
-
 	private static JsonArray getCategories(String json) {
 		JsonParser jp = new JsonParser();
 		JsonElement je = jp.parse(json);
@@ -56,13 +50,6 @@ public class HackerrankJson {
 			sb.append(parseChildren(children, slug));
 		}
 		return sb.toString();
-	}
-
-	public static List<String> unsolved(String domain, String subdomain) {
-		ChromeExecutor.openBrowser(String.format(PageReader.HACKERRANK_URL, domain, subdomain));
-		String pageContent = RobotHelper.getPageContent();
-		String p = HackerrankJson.UNSOLVED_CHALLENGE_PATTERN;
-		return SearchUtils.findAllMultiline(p, pageContent);
 	}
 
 }
