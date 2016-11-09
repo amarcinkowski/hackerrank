@@ -13,5 +13,12 @@ public class Arrays extends SolutionTestSuite {
 		runTest();
 	}
 
+	@Test
+	@TestInfo(platform = "codility", domain = "java", subdomain = "2-arrays", classname = "Cyclicrotation", taskDescription = "CyclicRotation")
+	public void cyclicrotation() {
+		runTest();
+	}
+
+
 
 }
