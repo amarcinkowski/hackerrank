@@ -100,15 +100,6 @@ public class SolutionTestSuite {
 		return ti;
 	}
 
-	// static String getCanonical(TestInfo ti) {
-	// String packageBase = String.format("%s.%s", Solution.PACKAGE,
-	// ti.platform());
-	// String canonical = getCanonical(packageBase,
-	// StringUtils.packagify(ti.group()), ti.solutionClass());
-	// System.out.println("CANONICAL>" + canonical);
-	// return canonical;
-	// }
-
 	static String getCanonical(String packagebase, String packagename, String classname) {
 		return String.format("%s.%s.%s", packagebase, packagename, classname);
 	}
@@ -117,7 +108,6 @@ public class SolutionTestSuite {
 			throws NoSuchMethodException, SecurityException, ClassNotFoundException, MissingAnnotationException {
 		Method currentlyRuningTest = getCurrentlyRunningTest();
 		TestInfo ti = getTestInfo(currentlyRuningTest);
-		// String canonical = getCanonical(ti);
 		current = factory.getSolution(ti);
 	}
 
