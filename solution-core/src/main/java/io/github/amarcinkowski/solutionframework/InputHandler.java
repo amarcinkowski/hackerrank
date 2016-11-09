@@ -7,7 +7,13 @@ import java.util.stream.Collectors;
 public class InputHandler {
 
 	public int[] readIntArray(String line) {
-		List<Integer> l = Arrays.asList(line.split(" ")).stream().map(Integer::valueOf).collect(Collectors.toList());
+		List<Integer> l = null;
+		if (line.startsWith("[")) {
+			line = line.substring(1, line.length() - 1);
+			l = Arrays.asList(line.split(", ")).stream().map(Integer::valueOf).collect(Collectors.toList());
+		} else {
+			l = Arrays.asList(line.split(" ")).stream().map(Integer::valueOf).collect(Collectors.toList());
+		}
 		return l.stream().mapToInt(i -> i).toArray();
 	}
 
