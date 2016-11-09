@@ -2,8 +2,6 @@ package io.github.amarcinkowski.utils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Document.OutputSettings;
-import org.jsoup.nodes.Document.OutputSettings.Syntax;
 
 public class XMLUtils {
 
