@@ -84,6 +84,7 @@ public class Cli {
 				}
 				break;
 			case GENERATE:
+				// TODO replace _ to - (vide Tape_equilibrium)
 				switch (gc.platform) {
 				case HACKERRANK:
 					PageReader.generate(PageReader.HACKERRANK_URL, gc.platform, gc.domain, gc.subdomain);
