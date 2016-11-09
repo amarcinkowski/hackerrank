@@ -26,6 +26,8 @@ public class Cli {
 	private static final String LIST = "list";
 	private static final String RUN_SH = "run.sh";
 	private static final String CREATE = "create";
+
+	// TODO pick tests data directory based on: 1. run from eclipse / junit runner 2. run using mvn test / mvn invoker 
 	private static final String TEST = "test";
 
 	@Parameter(names = { "-h", "--help" }, help = true, description = "this message")
